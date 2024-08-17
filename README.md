@@ -68,3 +68,34 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## Estructura del Proyecto
+
+### `src/components/`
+
+**Descripción**: Almacena los componentes de React reutilizables que pueden ser utilizados en diferentes partes de la aplicación. Los componentes aquí deben ser modulares y enfocados en una única funcionalidad.
+
+### `src/pages/`
+
+**Descripción**: Contiene los componentes de página que representan vistas principales en la aplicación. Estos componentes generalmente ensamblan varios componentes de la carpeta `components/` para formar una página completa.
+
+### `src/services/`
+
+**Descripción**: Contiene la lógica para interactuar con servicios externos, como APIs. Aquí es donde configuras y gestionas las llamadas a la API y otras integraciones de datos.
+
+### `src/utils/`
+
+**Descripción**: Almacena funciones utilitarias y helpers que pueden ser utilizadas en diferentes partes de la aplicación. Estas funciones no están directamente relacionadas con los componentes y se utilizan para tareas generales.
+
+### `src/styles/`
+
+**Descripción**: Contiene archivos de estilo globales y CSS. Aquí puedes colocar estilos que se aplican a toda la aplicación o estilos específicos que no están directamente asociados con un componente particular.
+
+### `src/App.js`
+
+**Descripción**: El componente raíz de la aplicación. Aquí se configuran los enrutamientos principales (si se usa React Router) y se ensamblan los componentes principales para la estructura general de la aplicación.
+
+### `src/index.js`
+
+**Descripción**: El punto de entrada principal de la aplicación. Renderiza el componente `App` en el DOM utilizando `ReactDOM.render` y configura cualquier configuración global necesaria (como el contexto del enrutador o el proveedor de estado global).

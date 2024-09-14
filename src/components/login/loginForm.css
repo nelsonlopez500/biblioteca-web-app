@@ -1,0 +1,17 @@
+.form-group {
+    margin-bottom: 30px; /* Aumentar la separación entre los campos */
+}
+
+.btn {
+    width: 100%; /* Ancho del 100% */
+    border-radius: 20px; /* Bordes redondeados */
+}
+
+.login-card {
+    width: 90%; /* Reducir el ancho del formulario */
+    max-width: 500px; /* Reducir el ancho máximo */
+    height: auto; /* Ajustar la altura automáticamente */
+    background-color: rgb(255, 255, 255); /* Fondo blanco con transparencia */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto de elevación */
+}

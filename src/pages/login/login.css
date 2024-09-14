@@ -1,0 +1,38 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #6b11cb, #2574fc); /* Fondo degradado */
+}
+
+.login-card {
+    width: 100%;
+    max-width: 500px; /* Ajustar el ancho máximo */
+    height: auto; /* Ajustar la altura automáticamente */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra para darle un efecto de elevación */
+    overflow: hidden; /* Evitar desbordamiento */
+}
+
+.card {
+    border: none; /* Eliminar borde por defecto */
+    border-radius: 55px; /* Bordes redondeados */
+    overflow: hidden; /* Evitar desbordamiento */
+}
+
+
+
+.card-body {
+    padding: 20px; /* Añadir padding */
+    text-align: center; /* Centrar texto */
+}
+
+.custom-card {
+    border: 1px solid #ddd; /* Borde más claro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    overflow: hidden; /* Evitar desbordamiento */
+    padding: 0; /* Eliminar padding por defecto */
+}

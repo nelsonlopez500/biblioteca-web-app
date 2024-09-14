@@ -3,7 +3,7 @@
             flex-direction: column;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(to right, #6b11cb80, #2574fc81); /* Fondo degradado */
+            background: linear-gradient(to right, #6b11cb1f, #2574fc81); /* Fondo degradado */
             position: relative;
             z-index: 2; /* Asegurar que el dashboard tenga un z-index más alto */
         }

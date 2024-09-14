@@ -1,27 +1,44 @@
         .dashboard {
-        padding: 20px;
-    }
-    
-    .navbar ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    
-    .navbar li {
-        display: inline;
-        margin-right: 10px;
-    }
-    
-    .cards-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        margin-top: 20px;
-    }
-    
-    .card {
-        border: 1px solid #ccc;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        
+        .cards-container {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .card {
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: scale(1.05);
+        }
+        
+        .card-img-top {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .card-body {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .card-body h3 {
+            margin-bottom: 10px;
+        }
+        
+        .card-body p {
+            color: #666;
+        }

@@ -24,11 +24,18 @@ const Dashboard = () => {
                         <p>Ir a la sección de Libros</p>
                     </div>
                 </div>
-                <div className="card" onClick={() => handleCardClick('/reportes')}>
-                    <img src="https://c0.wallpaperflare.com/preview/533/923/694/accounting-business-close-up-computation.jpg" className="card-img-top" alt="Reportes" />
+                <div className="card" onClick={() => handleCardClick('/prestamos')}>
+                    <img src="https://www.comunidadbaratz.com/wp-content/uploads/Hay-muchisimos-libros-en-las-bibliotecas-pero-solamente-unos-pocos-comparten-el-privilegio-de-ser-los-mas-prestados-1.jpg" className="card-img-top" alt="Préstamos" />
                     <div className="card-body">
-                        <h3>Reportes</h3>
-                        <p>Ir a la sección de Reportes</p>
+                        <h3>Préstamos</h3>
+                        <p>Ir a la sección de Préstamos</p>
+                    </div>
+                </div>
+                <div className="card" onClick={() => handleCardClick('/editoriales')}>
+                    <img src="https://p4.wallpaperbetter.com/wallpaper/944/111/648/book-books-culture-edition-wallpaper-preview.jpg" className="card-img-top" alt="Editoriales" />
+                    <div className="card-body">
+                        <h3>Editoriales</h3>
+                        <p>Ir a la sección de Editoriales</p>
                     </div>
                 </div>
                 <div className="card" onClick={() => handleCardClick('/usuarios')}>
@@ -39,6 +46,9 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+            <footer className="dashboard-footer">
+                © 2024 Sistema de gestión de biblioteca. Todos los derechos reservados.
+            </footer>
         </div>
     );
 };

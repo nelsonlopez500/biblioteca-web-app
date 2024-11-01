@@ -1,0 +1,56 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to right, #250544cf, #0c2859bd);
+    /* Fondo degradado */
+    position: relative;
+    z-index: 2;
+    /* Asegurar que el dashboard tenga un z-index más alto */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+}
+
+.dashboard-title {
+    margin-top: 60px;
+    font-size: 24px;
+    color: #333;
+}
+
+.title-bar {
+    width: calc(100% - 40px); /* Ajusta el ancho para tener en cuenta los márgenes laterales */
+    padding: 10px;
+    background-color: #090c3c;
+    text-align: left; /* Alinea el texto a la izquierda */
+    color: white; /* Cambia el color del texto a blanco */
+    margin: 20px; /* Margen superior, inferior, izquierdo y derecho */
+    margin-left: 20px; /* Margen izquierdo específico */
+}
+
+.table-card {
+    width: 100%;
+    max-width: 1800px; /* Ajusta el ancho máximo de la tarjeta */
+    margin: 20px auto; /* Centra la tarjeta horizontalmente */
+    background-color: rgba(255, 255, 255, 0.197); /* Fondo blanco con transparencia */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar efecto de elevación */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 10px; /* Padding de 10px para la tarjeta */
+}
+
+.table-container {
+    width: 100%;
+    padding: 10px; /* Padding de 10px para el contenedor de la tabla */
+}
+
+/* Media queries para ajustar el diseño en pantallas más pequeñas */
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+        /* Hacer que las cards ocupen el 100% del ancho en pantallas pequeñas */
+    }
+}

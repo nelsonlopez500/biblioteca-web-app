@@ -18,6 +18,14 @@
     background-color: rgba(255, 255, 255, 0.05);
 }
 
+.table-dark th {
+    background-color: #454d55; /* Color de fondo oscuro */
+    color: #f8f9fa; /* Color del texto claro */
+    border: 2px solid #343a40; /* Borde más grueso y oscuro */
+    padding: 10px; /* Añadir padding para mejorar la apariencia */
+    text-align: center; /* Centrar el texto */
+}
+
 .pagination {
     display: flex;
     justify-content: center;

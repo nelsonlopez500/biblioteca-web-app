@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
 import CommonPage from '../../pages/commonPage/Commonpage.jsx';
-import { getUsers } from '../../services/usuariosService.jsx';
+import { getUsers, getLibros, getPrestamos, getEditoriales } from '../../services/usuariosService.jsx';
 
 const DataLoader = () => {
     const [data, setData] = useState([]);
@@ -16,25 +16,13 @@ const DataLoader = () => {
                         fetchedData = await getUsers();
                         break;
                     case '/libros':
-                        fetchedData = [
-                            { name: 'Libro 1', author: 'Autor 1', year: 2020 },
-                            { name: 'Libro 2', author: 'Autor 2', year: 2019 },
-                            { name: 'Libro 3', author: 'Autor 3', year: 2018 }
-                        ];
+                        fetchedData = await getLibros();
                         break;
                     case '/prestamos':
-                        fetchedData = [
-                            { name: 'Prestamo 1', date: '2021-01-01', user: 'Usuario 1' },
-                            { name: 'Prestamo 2', date: '2021-02-01', user: 'Usuario 2' },
-                            { name: 'Prestamo 3', date: '2021-03-01', user: 'Usuario 3' }
-                        ];
+                        fetchedData = await getPrestamos();
                         break;
                     case '/editoriales':
-                        fetchedData = [
-                            { name: 'Editorial 1', country: 'País 1' },
-                            { name: 'Editorial 2', country: 'País 2' },
-                            { name: 'Editorial 3', country: 'País 3' }
-                        ];
+                        fetchedData = await getEditoriales();
                         break;
                     default:
                         break;

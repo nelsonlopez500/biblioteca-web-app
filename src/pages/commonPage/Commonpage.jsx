@@ -5,7 +5,7 @@ import TableComponent from '../../components/tables/TableComponent.jsx';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './Commonpage.css';
 
-const CommonPage = ({ title, icon, tableData = [], tableName = "Default Table Name" }) => {
+const CommonPage = ({ title, icon, tableData = [], tableName = "Default Table Name", showAddButton = false }) => {
     return (
         <div className="page-container">
             <div className="dashboard">
@@ -13,6 +13,12 @@ const CommonPage = ({ title, icon, tableData = [], tableName = "Default Table Na
                 <Sidebar />
                 <div className="title-bar">
                     <h4><i className={`bi ${icon}`}></i> {title}</h4>
+                    {showAddButton && (
+                        <button className="add-button">
+                            <i className="bi bi-plus-circle icon"></i>
+                            Agregar
+                        </button>
+                    )}
                 </div>
                 <div className="table-card">
                     <div className="table-container">

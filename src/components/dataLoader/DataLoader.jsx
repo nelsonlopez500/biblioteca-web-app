@@ -50,10 +50,10 @@ const DataLoader = () => {
 
     return (
         <Routes>
-            <Route path="/libros" element={<CommonPage title="Libros" icon="bi-book" tableName="Libros Table" tableData={data} />} />
-            <Route path="/prestamos" element={<CommonPage title="Préstamos" icon="bi-journal-arrow-up" tableName="Préstamos Table" tableData={data} />} />
-            <Route path="/editoriales" element={<CommonPage title="Editoriales" icon="bi-building" tableName="Editoriales Table" tableData={data} />} />
-            <Route path="/usuarios" element={<CommonPage title="Usuarios" icon="bi-people-fill" tableName="Usuarios Table" tableData={data} />} />
+            <Route path="/libros" element={<CommonPage title="Libros" icon="bi-book" tableName="Libros Table" tableData={data} showAddButton={true} />} />
+            <Route path="/prestamos" element={<CommonPage title="Préstamos" icon="bi-journal-arrow-up" tableName="Préstamos Table" tableData={data} showAddButton={true} />} />
+            <Route path="/editoriales" element={<CommonPage title="Editoriales" icon="bi-building" tableName="Editoriales Table" tableData={data} showAddButton={true} />} />
+            <Route path="/usuarios" element={<CommonPage title="Usuarios" icon="bi-people-fill" tableName="Usuarios Table" tableData={data} showAddButton={true} />} />
         </Routes>
     );
 };

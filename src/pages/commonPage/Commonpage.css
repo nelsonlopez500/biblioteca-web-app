@@ -23,18 +23,33 @@
 }
 
 .title-bar {
-    width: calc(100% - 40px); /* Ajusta el ancho para tener en cuenta los márgenes laterales */
-    padding: 10px;
-    background-color: #090c3c;
+    width: calc(100% - 60px); /* Ajusta el ancho para tener en cuenta los márgenes laterales */
+    padding: 15px 20px; /* Ajusta el padding para un mejor espaciado */
+    background: linear-gradient(135deg, #070f1e 0%, #214077 100%); /* Gradiente de fondo */
     text-align: left; /* Alinea el texto a la izquierda */
     color: white; /* Cambia el color del texto a blanco */
     margin: 20px; /* Margen superior, inferior, izquierdo y derecho */
     margin-left: 20px; /* Margen izquierdo específico */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar efecto de elevación */
+    display: flex; /* Usar flexbox para alinear el contenido */
+    align-items: center; /* Centrar verticalmente el contenido */
+}
+
+.title-bar h4 {
+    margin: 0; /* Elimina el margen del título */
+    font-size: 18px; /* Tamaño de fuente más grande */
+    font-weight: 600; /* Fuente más gruesa */
+}
+
+.title-bar i {
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+    font-size: 28px; /* Tamaño de icono más grande */
 }
 
 .table-card {
     width: 100%;
-    max-width: 1800px; /* Ajusta el ancho máximo de la tarjeta */
+    max-width: 1700px; /* Ajusta el ancho máximo de la tarjeta */
     margin: 20px auto; /* Centra la tarjeta horizontalmente */
     background-color: rgba(255, 255, 255, 0.197); /* Fondo blanco con transparencia */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar efecto de elevación */

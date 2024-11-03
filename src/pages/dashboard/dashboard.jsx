@@ -15,7 +15,11 @@ const Dashboard = () => {
         <div className="dashboard">
             <Navbar />
             <Sidebar />
-            <h1 className="dashboard-title">Sistema de gestión de biblioteca</h1>
+            <div className="title-bar-container-dashboard">
+                <div className="title-bar-dashboard">
+                    <h2>Sistema de Gestion de BiblioTK</h2>
+                </div>
+            </div>
             <div className="cards-container">
                 <div className="card" onClick={() => handleCardClick('/libros')}>
                     <img src="https://climatica.coop/wp-content/uploads/2024/01/1280px-Books_HD_8314929977-900x600.jpg?w=390&q=90" className="card-img-top" alt="Libros" />
@@ -49,7 +53,7 @@ const Dashboard = () => {
             <footer className="dashboard-footer">
                 © 2024 Sistema de gestión de biblioteca. Todos los derechos reservados.
             </footer>
-        </div>
+        </div >
     );
 };
 

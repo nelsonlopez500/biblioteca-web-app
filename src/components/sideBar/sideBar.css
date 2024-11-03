@@ -1,24 +1,47 @@
 .sidebar {
     position: fixed;
-    top: 0;
+    top: 50px;
     left: 0;
     width: 250px;
-    height: 100%;
-    background-color: #343a40;
+    height: 90%;
+    background: linear-gradient(to bottom, rgba(12, 22, 44, 0.979), rgba(52, 58, 64, 0.979)); /* Fondo degradado con transparencia */
     color: #fff;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     transform: translateX(-230px); /* Mostrar parcialmente el sidebar */
     z-index: 1; /* Asegurar que el sidebar tenga un z-index más bajo */
     display: flex;
     flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sombra para dar efecto de elevación */
+    border-top-right-radius: 10px; /* Bordes redondeados en la parte superior derecha */
+    border-bottom-right-radius: 10px; /* Bordes redondeados en la parte inferior derecha */
 }
 
 .sidebar.open {
     transform: translateX(0);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.7); /* Sombra más pronunciada cuando está abierto */
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(12, 22, 44, 0.9); /* Fondo ligeramente más oscuro */
+    border-top-right-radius: 10px; /* Bordes redondeados en la parte superior derecha */
+}
+
+.sidebar-logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.sidebar-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
 }
 
 .sidebar-nav {
-    margin-top: 60px;
+    margin-top: 20px;
     flex-grow: 1; /* Permitir que el nav crezca para empujar el botón hacia abajo */
     display: flex;
     flex-direction: column;
@@ -32,16 +55,25 @@
 
 .sidebar-nav ul li {
     padding: 15px 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave para el fondo y el movimiento */
 }
 
 .sidebar-nav ul li a {
     color: #fff;
     text-decoration: none;
     display: block;
+    font-size: 18px; /* Tamaño de fuente más grande */
+    font-weight: 500; /* Fuente más gruesa */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.sidebar-nav ul li:hover {
+    background-color: rgba(73, 80, 87, 0.8); /* Fondo con transparencia al pasar el ratón */
+    transform: translateX(5px); /* Mover ligeramente a la derecha al pasar el ratón */
 }
 
 .sidebar-nav ul li a:hover {
-    background-color: #495057;
+    color: #17a2b8; /* Cambiar el color del texto al pasar el ratón */
 }
 
 .logout-container {
@@ -57,10 +89,13 @@
     cursor: pointer;
     width: 100%; /* Ajustar el ancho del botón */
     text-align: center;
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave para el fondo y el movimiento */
 }
 
 .logout-button:hover {
     background-color: #c82333;
+    transform: scale(1.05); /* Aumentar ligeramente el tamaño al pasar el ratón */
 }
 
 /* Media queries para ajustar el diseño en pantallas más pequeñas */

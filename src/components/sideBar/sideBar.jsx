@@ -25,10 +25,15 @@ const Sidebar = () => {
             onMouseEnter={handleMouseEnter} 
             onMouseLeave={handleMouseLeave}
         >
+            <div className="sidebar-header">
+                <img src="/formas-y-simbolo.png" alt="Logo" className="sidebar-logo" />
+                <span className="sidebar-title">BiblioTK</span>
+            </div>
             <nav className="sidebar-nav">
                 <ul>
                     <li><Link to="/libros">Libros</Link></li>
-                    <li><Link to="/reportes">Reportes</Link></li>
+                    <li><Link to="/prestamos">Préstamos</Link></li>
+                    <li><Link to="/editoriales">Editoriales</Link></li>
                     <li><Link to="/usuarios">Usuarios</Link></li>
                 </ul>
                 <div className="logout-container">

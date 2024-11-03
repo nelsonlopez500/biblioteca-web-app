@@ -3,17 +3,18 @@
             flex-direction: column;
             align-items: center;
             height: 100vh;
-            background-color: #ffffff !important; /* Fondo blanco con !important */
+            background-color: #ffffff !important;
+            /* Fondo blanco con !important */
             position: relative;
             z-index: 2;
         }
-        
+
         .dashboard-title {
             margin-top: 60px;
             font-size: 24px;
             color: #333;
         }
-        
+
         .cards-container {
             display: flex;
             flex-wrap: wrap;
@@ -21,7 +22,7 @@
             margin-top: 100px;
             justify-content: center;
         }
-        
+
         .card {
             width: 300px;
             border: 1px solid #ddd;
@@ -30,30 +31,30 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-        
+
         .card:hover {
             transform: scale(1.05);
         }
-        
+
         .card-img-top {
             width: 100%;
             height: 150px;
             object-fit: cover;
         }
-        
+
         .card-body {
             padding: 15px;
             text-align: center;
         }
-        
+
         .card-body h3 {
             margin-bottom: 10px;
         }
-        
+
         .card-body p {
             color: #666;
         }
-        
+
         .dashboard-footer {
             text-align: center;
             margin-top: 300px;
@@ -61,7 +62,66 @@
             font-size: 14px;
             color: #fff4f4;
         }
-        
+
+        /* Contenedor padre para centrar la barra de título */
+        .title-bar-container-dashboard {
+            display: flex;
+            justify-content: center;
+            /* Centrar horizontalmente el contenido */
+            width: 100%;
+            /* Asegura que el contenedor ocupe todo el ancho */
+        }
+
+        .title-bar-dashboard {
+            width: 50%;
+            /* Usa el 50% del espacio de pantalla */
+            padding: 15px 15px;
+            /* Ajusta el padding para un mejor espaciado */
+            background: linear-gradient(135deg, #070f1e 0%, #214077 100%);
+            /* Gradiente de fondo */
+            color: white;
+            /* Cambia el color del texto a blanco */
+            margin: 20px 0;
+            /* Margen superior e inferior */
+            border-radius: 8px;
+            /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Sombra para dar efecto de elevación */
+            display: flex;
+            /* Usar flexbox para alinear el contenido */
+            align-items: center;
+            /* Centrar verticalmente el contenido */
+            justify-content: center;
+            /* Centrar horizontalmente el contenido */
+            transition: transform 0.3s ease;
+            /* Transición suave para el movimiento */
+        }
+
+        .title-bar-dashboard:hover {
+            animation: bounce 0.5s;
+            /* Aplicar la animación de rebote al pasar el mouse */
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+
         @media (max-width: 768px) {
             .card {
                 width: 100%;

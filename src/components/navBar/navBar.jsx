@@ -5,7 +5,7 @@ import './navBar.css';
 const Navbar = () => {
     return (
         <nav className="navbar">
-            <img src="/books_logo.png" alt="Books Logo" className="navbar-logo" />
+            <img src="/formas-y-simbolo.png" alt="Books Logo" className="navbar-logo" />
         </nav>
     );
 };

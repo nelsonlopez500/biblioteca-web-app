@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FormularioLibros.css';
 
-const FormularioLibros = ({ show, handleClose, onSubmit }) => {
+const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
     const [libro, setLibro] = useState({
         titulo: '',
         isbn: '',
@@ -51,7 +51,7 @@ const FormularioLibros = ({ show, handleClose, onSubmit }) => {
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Registrar Nuevo Libro</h5>
+                                <h5 className="modal-title">{TitleForm}</h5>
                                 <button
                                     type="button"
                                     className="btn-close"

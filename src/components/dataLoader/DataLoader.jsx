@@ -48,7 +48,8 @@ const DataLoader = () => {
                         tableName="Libros Table" 
                         tableData={data} 
                         showAddButton={true}
-                        FormComponent={FormularioLibros}
+                        FormComponent={(props) => <FormularioLibros {...props} TitleForm="Agregar Libro" />}
+                        EditComponent={(props) => <FormularioLibros {...props} TitleForm="Editar Libro" />}
                     />
                 } 
             />

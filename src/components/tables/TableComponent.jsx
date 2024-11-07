@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './TableComponent.css';
 
-const TableComponent = ({ tableName, data }) => {
+const TableComponent = ({ tableName, data, showEditButton = false, EditComponent }) => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [isEditVisible, setIsEditVisible] = useState(false);
+    const [selectedRow, setSelectedRow] = useState(null);
     const itemsPerPage = 10;
+    const [showModal, setShowModal] = useState(false);
+
 
     if (!data || data.length === 0) {
         return <div className="table-container">No data available</div>;
@@ -22,6 +26,30 @@ const TableComponent = ({ tableName, data }) => {
         setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
     };
 
+    const handleEdit = (row) => {
+        setSelectedRow(row);
+        setIsEditVisible(true);
+        setShowModal(true)
+    };
+
+    const handleSubmit = async (formData) => {
+        try {
+            // Aquí va la lógica de guardado
+            console.log('Form data:', formData);
+            setShowModal(false);
+
+            window.location.reload();
+
+        } catch (error) {
+            console.error('Error al guardar:', error);
+        }
+    };
+
+    const handleCloseEdit = () => {
+        setIsEditVisible(false);
+        setSelectedRow(null);
+    };
+
     const startIndex = (currentPage - 1) * itemsPerPage;
     const currentData = data.slice(startIndex, startIndex + itemsPerPage);
 
@@ -34,6 +62,7 @@ const TableComponent = ({ tableName, data }) => {
                             {columns.map((key) => (
                                 <th key={key}>{key}</th>
                             ))}
+                            {showEditButton && <th>Acciones</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +71,16 @@ const TableComponent = ({ tableName, data }) => {
                                 {columns.map((column) => (
                                     <td key={column}>{row[column]}</td>
                                 ))}
+                                {showEditButton && (
+                                    <td>
+                                        <button
+                                            className="btn btn-primary btn-sm"
+                                            onClick={() => handleEdit(row)}
+                                        >
+                                            <i className="bi bi-pencil"></i> Editar
+                                        </button>
+                                    </td>
+                                )}
                             </tr>
                         ))}
                     </tbody>
@@ -58,6 +97,13 @@ const TableComponent = ({ tableName, data }) => {
                     Next &raquo;
                 </button>
             </div>
+            {EditComponent && (
+                <EditComponent
+                    show={showModal}
+                    handleClose={() => setShowModal(false)}
+                    onSubmit={handleSubmit}
+                />
+            )}
         </div>
     );
 };
@@ -65,6 +111,8 @@ const TableComponent = ({ tableName, data }) => {
 TableComponent.propTypes = {
     tableName: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    showEditButton: PropTypes.bool,
+    EditComponent: PropTypes.elementType
 };
 
 export default TableComponent;

@@ -5,7 +5,7 @@ import TableComponent from '../../components/tables/TableComponent.jsx';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './Commonpage.css';
 
-const CommonPage = ({ title, icon, tableData = [], tableName = "Default Table Name", showAddButton = false, FormComponent }) => {
+const CommonPage = ({ title, icon, tableData = [], tableName = "Default Table Name", showAddButton = false, FormComponent, EditComponent }) => {
     const [showModal, setShowModal] = useState(false);
 
     const handleSubmit = async (formData) => {
@@ -37,7 +37,16 @@ const CommonPage = ({ title, icon, tableData = [], tableName = "Default Table Na
                 </div>
                 <div className="table-card">
                     <div className="table-container">
-                        <TableComponent tableName={tableName} data={tableData} />
+                        <TableComponent
+                            tableName={tableName}
+                            data={tableData}
+                            showEditButton={true}
+                            onEdit={(index) => {
+                                const id = tableData[index].id;
+                                console.log('Editando registro con id:', id);
+                            }}
+                            EditComponent={EditComponent}
+                        />
                     </div>
                 </div>
             </div>

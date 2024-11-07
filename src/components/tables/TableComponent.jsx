@@ -27,9 +27,14 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
     };
 
     const handleEdit = (row) => {
+        console.log('Deleting row:', row);
         setSelectedRow(row);
         setIsEditVisible(true);
         setShowModal(true)
+    };
+
+    const handleDelete = (row) => {
+        console.log('Deleting row:', row);
     };
 
     const handleSubmit = async (formData) => {
@@ -45,10 +50,6 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
         }
     };
 
-    const handleCloseEdit = () => {
-        setIsEditVisible(false);
-        setSelectedRow(null);
-    };
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const currentData = data.slice(startIndex, startIndex + itemsPerPage);
@@ -73,12 +74,20 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
                                 ))}
                                 {showEditButton && (
                                     <td>
-                                        <button
-                                            className="btn btn-primary btn-sm"
-                                            onClick={() => handleEdit(row)}
-                                        >
-                                            <i className="bi bi-pencil"></i> Editar
-                                        </button>
+                                        <div className="d-flex gap-2">
+                                            <button
+                                                className="btn btn-primary btn-sm"
+                                                onClick={() => handleEdit(row)}
+                                            >
+                                                <i className="bi bi-pencil"></i> Editar
+                                            </button>
+                                            <button
+                                                className="btn btn-danger btn-sm"
+                                                onClick={() => handleDelete(row)}
+                                            >
+                                                <i className="bi bi-trash"></i> Eliminar
+                                            </button>
+                                        </div>
                                     </td>
                                 )}
                             </tr>

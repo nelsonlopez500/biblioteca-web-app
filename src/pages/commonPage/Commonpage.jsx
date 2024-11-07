@@ -41,10 +41,6 @@ const CommonPage = ({ title, icon, tableData = [], tableName = "Default Table Na
                             tableName={tableName}
                             data={tableData}
                             showEditButton={true}
-                            onEdit={(index) => {
-                                const id = tableData[index].id;
-                                console.log('Editando registro con id:', id);
-                            }}
                             EditComponent={EditComponent}
                         />
                     </div>

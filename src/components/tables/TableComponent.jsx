@@ -5,11 +5,8 @@ import './TableComponent.css';
 
 const TableComponent = ({ tableName, data, showEditButton = false, EditComponent }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [isEditVisible, setIsEditVisible] = useState(false);
-    const [selectedRow, setSelectedRow] = useState(null);
     const itemsPerPage = 10;
     const [showModal, setShowModal] = useState(false);
-
 
     if (!data || data.length === 0) {
         return <div className="table-container">No data available</div>;
@@ -28,8 +25,6 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
 
     const handleEdit = (row) => {
         console.log('Deleting row:', row);
-        setSelectedRow(row);
-        setIsEditVisible(true);
         setShowModal(true)
     };
 
@@ -39,17 +34,13 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
 
     const handleSubmit = async (formData) => {
         try {
-            // Aquí va la lógica de guardado
             console.log('Form data:', formData);
             setShowModal(false);
-
             window.location.reload();
-
         } catch (error) {
             console.error('Error al guardar:', error);
         }
     };
-
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const currentData = data.slice(startIndex, startIndex + itemsPerPage);
@@ -70,7 +61,11 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
                         {currentData.map((row, index) => (
                             <tr key={index}>
                                 {columns.map((column) => (
-                                    <td key={column}>{row[column]}</td>
+                                    <td key={column}>
+                                        {typeof row[column] === 'boolean' 
+                                            ? (row[column] ? 'Activo' : 'Inactivo')
+                                            : row[column]}
+                                    </td>
                                 ))}
                                 {showEditButton && (
                                     <td>

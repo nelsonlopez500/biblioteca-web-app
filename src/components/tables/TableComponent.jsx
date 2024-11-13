@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { deleteLibro } from '../../services/apisService';
 import './TableComponent.css';
 
 const TableComponent = ({ 
@@ -59,8 +60,19 @@ const TableComponent = ({
         setShowModal(true);
     };
 
-    const handleDelete = (row) => {
-        console.log('Deleting row:', row);
+    const handleDelete = async (row) => {
+        try {
+            // Confirmación antes de eliminar
+            const isConfirmed = window.confirm('¿Está seguro que desea eliminar este libro?');
+            
+            if (isConfirmed) {
+                await deleteLibro(row.libro_id);
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error('Error al eliminar libro:', error);
+            // Aquí puedes manejar la visualización del error
+        }
     };
 
     const handleSubmit = async (formData) => {

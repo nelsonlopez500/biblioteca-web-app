@@ -1,4 +1,4 @@
-import { usersApiClient, librosApiClient, prestamosApiClient, editorialesApiClient, createLibroApiClient } from '../apis/axiosConfig';
+import { usersApiClient, librosApiClient, prestamosApiClient, editorialesApiClient, createLibroApiClient, deleteLibroApiClient } from '../apis/axiosConfig';
 
 // Métodos para la API de usuarios
 export const getUsers = async () => {
@@ -51,6 +51,17 @@ export const createLibro = async (libro) => {
         return response.data;
     } catch (error) {
         console.error('Error creating libro:', error);
+        throw error;
+    }
+};
+
+//Metodo para eliminar un libro
+export const deleteLibro = async (libroId) => {
+    try {
+        const response = await deleteLibroApiClient.delete(`/${libroId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting libro:', error);
         throw error;
     }
 };

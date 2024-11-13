@@ -16,3 +16,4 @@ export const editorialesApiClient = createApiClient(process.env.REACT_APP_EDITOR
 export const librosApiClient = createApiClient(process.env.REACT_APP_LIBROS_API_URL);
 export const prestamosApiClient = createApiClient(process.env.REACT_APP_PRESTAMOS_API_URL);
 export const createLibroApiClient = createApiClient(process.env.REACT_APP_CREATE_LIBRO_API_URL);
+export const deleteLibroApiClient = createApiClient(process.env.REACT_APP_DELETE_LIBRO_API_URL);

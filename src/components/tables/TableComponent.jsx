@@ -3,17 +3,48 @@ import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './TableComponent.css';
 
-const TableComponent = ({ tableName, data, showEditButton = false, EditComponent }) => {
+const TableComponent = ({ 
+    tableName, 
+    data, 
+    columns = [], 
+    showEditButton = false, 
+    EditComponent 
+}) => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [sortColumn, setSortColumn] = useState(null);
+    const [sortDirection, setSortDirection] = useState('asc');
     const itemsPerPage = 10;
     const [showModal, setShowModal] = useState(false);
+    const [selectedRow, setSelectedRow] = useState(null);
 
     if (!data || data.length === 0) {
         return <div className="table-container">No data available</div>;
     }
 
-    const columns = Object.keys(data[0]);
+    const tableColumns = columns.length > 0 ? columns : Object.keys(data[0]).map(key => ({ key, label: key }));
     const totalPages = Math.ceil(data.length / itemsPerPage);
+
+    const handleSort = (columnKey) => {
+        if (sortColumn === columnKey) {
+            setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+        } else {
+            setSortColumn(columnKey);
+            setSortDirection('asc');
+        }
+    };
+
+    const sortedData = [...data].sort((a, b) => {
+        if (!sortColumn) return 0;
+        
+        const aValue = a[sortColumn];
+        const bValue = b[sortColumn];
+
+        if (sortDirection === 'asc') {
+            return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+        } else {
+            return bValue < aValue ? -1 : bValue > aValue ? 1 : 0;
+        }
+    });
 
     const handlePreviousPage = () => {
         setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
@@ -24,8 +55,8 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
     };
 
     const handleEdit = (row) => {
-        console.log('Deleting row:', row);
-        setShowModal(true)
+        setSelectedRow(row);
+        setShowModal(true);
     };
 
     const handleDelete = (row) => {
@@ -43,7 +74,7 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
     };
 
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const currentData = data.slice(startIndex, startIndex + itemsPerPage);
+    const currentData = sortedData.slice(startIndex, startIndex + itemsPerPage);
 
     return (
         <div className="table-container">
@@ -51,8 +82,17 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
                 <table className="table table-dark table-striped table-bordered">
                     <thead className="thead-dark">
                         <tr>
-                            {columns.map((key) => (
-                                <th key={key}>{key}</th>
+                            {tableColumns.map((column) => (
+                                <th 
+                                    key={column.key}
+                                    onClick={() => handleSort(column.key)}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    {column.label}
+                                    {sortColumn === column.key && (
+                                        <i className={`bi bi-arrow-${sortDirection === 'asc' ? 'up' : 'down'}`} />
+                                    )}
+                                </th>
                             ))}
                             {showEditButton && <th>Acciones</th>}
                         </tr>
@@ -60,11 +100,11 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
                     <tbody>
                         {currentData.map((row, index) => (
                             <tr key={index}>
-                                {columns.map((column) => (
-                                    <td key={column}>
-                                        {typeof row[column] === 'boolean' 
-                                            ? (row[column] ? 'Activo' : 'Inactivo')
-                                            : row[column]}
+                                {tableColumns.map((column) => (
+                                    <td key={column.key}>
+                                        {typeof row[column.key] === 'boolean'
+                                            ? (row[column.key] ? 'Activo' : 'Inactivo')
+                                            : row[column.key]}
                                     </td>
                                 ))}
                                 {showEditButton && (
@@ -92,13 +132,13 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
             </div>
             <div className="pagination">
                 <button onClick={handlePreviousPage} disabled={currentPage === 1}>
-                    &laquo; Previous
+                    &laquo; Anterior
                 </button>
                 <span>
                     Page {currentPage} of {totalPages}
                 </span>
                 <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                    Next &raquo;
+                    siguiente &raquo;
                 </button>
             </div>
             {EditComponent && (
@@ -106,6 +146,7 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
                     show={showModal}
                     handleClose={() => setShowModal(false)}
                     onSubmit={handleSubmit}
+                    initialData={selectedRow}
                 />
             )}
         </div>
@@ -115,6 +156,12 @@ const TableComponent = ({ tableName, data, showEditButton = false, EditComponent
 TableComponent.propTypes = {
     tableName: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    columns: PropTypes.arrayOf(
+        PropTypes.shape({
+            key: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired
+        })
+    ),
     showEditButton: PropTypes.bool,
     EditComponent: PropTypes.elementType
 };

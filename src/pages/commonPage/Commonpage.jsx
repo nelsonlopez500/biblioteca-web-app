@@ -5,17 +5,23 @@ import TableComponent from '../../components/tables/TableComponent.jsx';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './Commonpage.css';
 
-const CommonPage = ({ title, icon, tableData = [], tableName = "Default Table Name", showAddButton = false, FormComponent, EditComponent }) => {
+const CommonPage = ({ 
+    title, 
+    icon, 
+    tableData = [], 
+    tableName = "Default Table Name", 
+    showAddButton = false, 
+    FormComponent, 
+    EditComponent,
+    columnHeaders = [] // Nueva prop para los encabezados
+}) => {
     const [showModal, setShowModal] = useState(false);
 
     const handleSubmit = async (formData) => {
         try {
-            // Aquí va la lógica de guardado
             console.log('Form data:', formData);
             setShowModal(false);
-
             window.location.reload();
-
         } catch (error) {
             console.error('Error al guardar:', error);
         }
@@ -40,6 +46,7 @@ const CommonPage = ({ title, icon, tableData = [], tableName = "Default Table Na
                         <TableComponent
                             tableName={tableName}
                             data={tableData}
+                            columns={columnHeaders} 
                             showEditButton={true}
                             EditComponent={EditComponent}
                         />

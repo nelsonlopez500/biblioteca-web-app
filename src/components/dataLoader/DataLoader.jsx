@@ -8,6 +8,51 @@ const DataLoader = () => {
     const [data, setData] = useState([]);
     const location = useLocation();
 
+    // Definimos los encabezados para cada ruta
+    const tableHeaders = {
+        '/libros': [
+            { key: 'libro_id', label: 'ID' },
+            { key: 'titulo', label: 'Título' },
+            { key: 'isbn', label: 'ISBN' },
+            { key: 'editorial_id', label: 'Editorial' },
+            { key: 'categoria_id', label: 'Categoría' },
+            { key: 'fecha_publicacion', label: 'Fecha Publicación' },
+            { key: 'status', label: 'Estado' }
+        ],
+        '/usuarios': [
+            { key: 'usuario_id', label: 'ID' },
+            { key: 'nombre', label: 'Nombre' },
+            { key: 'apellido', label: 'Apellido' },
+            { key: 'email', label: 'Email' },
+            { key: 'rol_id', label: 'Rol' },
+            { key: 'status', label: 'Estado' },
+            { key: 'fecha_registro', label: 'Fecha Registro' },
+            { key: 'direccion', label: 'Dirección' },
+            { key: 'telefono', label: 'Teléfono' }
+        ],
+        '/prestamos': [
+            { key: 'libro', label: 'Libro' },
+            { key: 'usuario', label: 'Usuario' },
+            { key: 'fechaPrestamo', label: 'Fecha Préstamo' },
+            { key: 'fechaDevolucion', label: 'Fecha Devolución' }
+        ],
+        '/editoriales': [
+            { key: 'editorial_id', label: 'ID' },
+            { key: 'nombre_editorial', label: 'Nombre Editorial' },
+            { key: 'status', label: 'Estado' },
+            { key: 'created_at', label: 'Fecha Creación' }
+        ]
+    };
+
+    // Función para ordenar datos
+    const sortData = (data, sortBy = 'nombre') => {
+        return [...data].sort((a, b) => {
+            if (a[sortBy] < b[sortBy]) return -1;
+            if (a[sortBy] > b[sortBy]) return 1;
+            return 0;
+        });
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -28,7 +73,9 @@ const DataLoader = () => {
                     default:
                         break;
                 }
-                setData(fetchedData);
+                // Ordenamos los datos antes de guardarlos
+                const sortedData = sortData(fetchedData, tableHeaders[location.pathname][0].key);
+                setData(sortedData);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -39,24 +86,60 @@ const DataLoader = () => {
 
     return (
         <Routes>
-            <Route 
-                path="/libros" 
+            <Route
+                path="/libros"
                 element={
-                    <CommonPage 
-                        title="Libros" 
-                        icon="bi-book" 
-                        tableName="Libros Table" 
-                        tableData={data} 
+                    <CommonPage
+                        title="Libros"
+                        icon="bi-book"
+                        tableName="Libros Table"
+                        tableData={data}
+                        columnHeaders={tableHeaders['/libros']}
                         showAddButton={true}
                         FormComponent={(props) => <FormularioLibros {...props} TitleForm="Agregar Libro" />}
                         EditComponent={(props) => <FormularioLibros {...props} TitleForm="Editar Libro" />}
                     />
-                } 
+                }
             />
-            {/* Agregar FormComponent a las demás rutas según se necesite */}
-            <Route path="/prestamos" element={<CommonPage title="Préstamos" icon="bi-journal-arrow-up" tableName="Préstamos Table" tableData={data} showAddButton={false} />} />
-            <Route path="/editoriales" element={<CommonPage title="Editoriales" icon="bi-building" tableName="Editoriales Table" tableData={data} showAddButton={true} />} />
-            <Route path="/usuarios" element={<CommonPage title="Usuarios" icon="bi-people-fill" tableName="Usuarios Table" tableData={data} showAddButton={true} />} />
+            <Route
+                path="/prestamos"
+                element={
+                    <CommonPage
+                        title="Préstamos"
+                        icon="bi-journal-arrow-up"
+                        tableName="Préstamos Table"
+                        tableData={data}
+                        columnHeaders={tableHeaders['/prestamos']}
+                        showAddButton={false}
+                    />
+                }
+            />
+            <Route
+                path="/editoriales"
+                element={
+                    <CommonPage
+                        title="Editoriales"
+                        icon="bi-building"
+                        tableName="Editoriales Table"
+                        tableData={data}
+                        columnHeaders={tableHeaders['/editoriales']}
+                        showAddButton={true}
+                    />
+                }
+            />
+            <Route
+                path="/usuarios"
+                element={
+                    <CommonPage
+                        title="Usuarios"
+                        icon="bi-people-fill"
+                        tableName="Usuarios Table"
+                        tableData={data}
+                        columnHeaders={tableHeaders['/usuarios']}
+                        showAddButton={true}
+                    />
+                }
+            />
         </Routes>
     );
 };

@@ -1,4 +1,4 @@
-import { usersApiClient, librosApiClient, prestamosApiClient, editorialesApiClient } from '../apis/axiosConfig';
+import { usersApiClient, librosApiClient, prestamosApiClient, editorialesApiClient, createLibroApiClient } from '../apis/axiosConfig';
 
 // Métodos para la API de usuarios
 export const getUsers = async () => {
@@ -40,6 +40,17 @@ export const getEditoriales = async () => {
         return response.data;
     } catch (error) {
         console.error('Error fetching editoriales:', error);
+        throw error;
+    }
+};
+
+//Metodo para crear un nuevo libro
+export const createLibro = async (libro) => {
+    try {
+        const response = await createLibroApiClient.post('', libro);
+        return response.data;
+    } catch (error) {
+        console.error('Error creating libro:', error);
         throw error;
     }
 };

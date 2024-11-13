@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
 import CommonPage from '../../pages/commonPage/Commonpage.jsx';
-import { getUsers, getLibros, getPrestamos, getEditoriales } from '../../services/usuariosService.jsx';
+import { getUsers, getLibros, getPrestamos, getEditoriales } from '../../services/apisService.jsx';
 import FormularioLibros from '../formularios/formularioLibros.jsx';
 
 const DataLoader = () => {
@@ -31,10 +31,13 @@ const DataLoader = () => {
             { key: 'telefono', label: 'Teléfono' }
         ],
         '/prestamos': [
-            { key: 'libro', label: 'Libro' },
-            { key: 'usuario', label: 'Usuario' },
-            { key: 'fechaPrestamo', label: 'Fecha Préstamo' },
-            { key: 'fechaDevolucion', label: 'Fecha Devolución' }
+            { key: 'libro_id', label: 'Libro' },
+            { key: 'usuario_id', label: 'Usuario' },
+            { key: 'fecha_prestamo', label: 'Fecha Préstamo' },
+            { key: 'fecha_vencimiento', label: 'Fecha Vencimiento' },
+            { key: 'estado_prestamo', label: 'Estado' },
+            { key: 'biblioteca_id', label: 'Biblioteca' },
+            { key: 'created_at', label: 'Fecha Creación' }
         ],
         '/editoriales': [
             { key: 'editorial_id', label: 'ID' },
@@ -123,7 +126,7 @@ const DataLoader = () => {
                         tableName="Editoriales Table"
                         tableData={data}
                         columnHeaders={tableHeaders['/editoriales']}
-                        showAddButton={true}
+                        showAddButton={false}
                     />
                 }
             />
@@ -136,7 +139,7 @@ const DataLoader = () => {
                         tableName="Usuarios Table"
                         tableData={data}
                         columnHeaders={tableHeaders['/usuarios']}
-                        showAddButton={true}
+                        showAddButton={false}
                     />
                 }
             />

@@ -1,7 +1,7 @@
-// FormularioLibros.jsx
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FormularioLibros.css';
+import { createLibro } from '../../services/apisService.jsx';
 
 const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
     const [libro, setLibro] = useState({
@@ -13,6 +13,7 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
         biblioteca_id: '',
         status: true
     });
+    const [error, setError] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,20 +23,27 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        onSubmit(libro);
-        handleClose();
-        // Limpiar formulario
-        setLibro({
-            titulo: '',
-            isbn: '',
-            fecha_publicacion: '',
-            editorial_id: '',
-            categoria_id: '',
-            biblioteca_id: '',
-            status: true
-        });
+        setError(null);
+        try {
+            const result = await createLibro(libro);
+            onSubmit(result);
+            handleClose();
+            // Limpiar formulario
+            setLibro({
+                titulo: '',
+                isbn: '',
+                fecha_publicacion: '',
+                editorial_id: '',
+                categoria_id: '',
+                biblioteca_id: '',
+                status: true
+            });
+        } catch (error) {
+            setError('Error al crear el libro');
+            console.error(error);
+        }
     };
 
     if (!show) return null;
@@ -43,7 +51,7 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
     return (
         <>
             <div className="modal-overlay">
-                <div 
+                <div
                     className="modal show"
                     style={{ display: 'block' }}
                     tabIndex="-1"

@@ -34,7 +34,7 @@ const Sidebar = () => {
                     <li><Link to="/Reclusos">Reclusos</Link></li>
                     <li><Link to="/Penales">Penales</Link></li>
                     <li><Link to="/Empleados">Empleados</Link></li>
-                    <li><Link to="/Planilla">Planilla</Link></li>
+                    <li><Link to="/Planillas">Planilla</Link></li>
                 </ul>
                 <div className="logout-container">
                     <button className="logout-button" onClick={handleLogout}>Cerrar sesión</button>

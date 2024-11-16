@@ -94,7 +94,7 @@ const DataLoader = () => {
                 element={
                     <CommonPage
                         title="Reclusos"
-                        icon="bi-book"
+                        icon="bi-file-lock2"
                         tableName="Reclusos Table"
                         tableData={data}
                         columnHeaders={tableHeaders['/Reclusos']}
@@ -109,7 +109,7 @@ const DataLoader = () => {
                 element={
                     <CommonPage
                         title="Penales"
-                        icon="bi-journal-arrow-up"
+                        icon="bi-grid-3x3"
                         tableName="Penales Table"
                         tableData={data}
                         columnHeaders={tableHeaders['/Penales']}
@@ -122,7 +122,7 @@ const DataLoader = () => {
                 element={
                     <CommonPage
                         title="Empleados"
-                        icon="bi-building"
+                        icon="bi-people-fill"
                         tableName="Empleados Table"
                         tableData={data}
                         columnHeaders={tableHeaders['/Empleados']}
@@ -134,8 +134,8 @@ const DataLoader = () => {
                 path="/Planillas"
                 element={
                     <CommonPage
-                        title="Planilla"
-                        icon="bi-people-fill"
+                        title="Planillas"
+                        icon="bi-book"
                         tableName="Planillas Table"
                         tableData={data}
                         columnHeaders={tableHeaders['/Planillas']}

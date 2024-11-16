@@ -27,14 +27,14 @@ const Sidebar = () => {
         >
             <div className="sidebar-header">
                 <img src="/formas-y-simbolo.png" alt="Logo" className="sidebar-logo" />
-                <span className="sidebar-title">BiblioTK</span>
+                <span className="sidebar-title">PenalNet</span>
             </div>
             <nav className="sidebar-nav">
                 <ul>
-                    <li><Link to="/libros">Libros</Link></li>
-                    <li><Link to="/prestamos">Préstamos</Link></li>
-                    <li><Link to="/editoriales">Editoriales</Link></li>
-                    <li><Link to="/usuarios">Usuarios</Link></li>
+                    <li><Link to="/Reclusos">Reclusos</Link></li>
+                    <li><Link to="/Penales">Penales</Link></li>
+                    <li><Link to="/Empleados">Empleados</Link></li>
+                    <li><Link to="/Planilla">Planilla</Link></li>
                 </ul>
                 <div className="logout-container">
                     <button className="logout-button" onClick={handleLogout}>Cerrar sesión</button>

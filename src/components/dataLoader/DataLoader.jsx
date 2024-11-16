@@ -10,7 +10,7 @@ const DataLoader = () => {
 
     // Definimos los encabezados para cada ruta
     const tableHeaders = {
-        '/libros': [
+        '/Planilla': [
             { key: 'libro_id', label: 'ID' },
             { key: 'titulo', label: 'Título' },
             { key: 'isbn', label: 'ISBN' },
@@ -19,7 +19,7 @@ const DataLoader = () => {
             { key: 'fecha_publicacion', label: 'Fecha Publicación' },
             { key: 'status', label: 'Estado' }
         ],
-        '/usuarios': [
+        '/Reclusos': [
             { key: 'usuario_id', label: 'ID' },
             { key: 'nombre', label: 'Nombre' },
             { key: 'apellido', label: 'Apellido' },
@@ -30,7 +30,7 @@ const DataLoader = () => {
             { key: 'direccion', label: 'Dirección' },
             { key: 'telefono', label: 'Teléfono' }
         ],
-        '/prestamos': [
+        '/Penales': [
             { key: 'libro_id', label: 'Libro' },
             { key: 'usuario_id', label: 'Usuario' },
             { key: 'fecha_prestamo', label: 'Fecha Préstamo' },
@@ -39,7 +39,7 @@ const DataLoader = () => {
             { key: 'biblioteca_id', label: 'Biblioteca' },
             { key: 'created_at', label: 'Fecha Creación' }
         ],
-        '/editoriales': [
+        '/Empleados': [
             { key: 'editorial_id', label: 'ID' },
             { key: 'nombre_editorial', label: 'Nombre Editorial' },
             { key: 'status', label: 'Estado' },
@@ -61,16 +61,16 @@ const DataLoader = () => {
             try {
                 let fetchedData = [];
                 switch (location.pathname) {
-                    case '/usuarios':
+                    case '/Planillas':
                         fetchedData = await getUsers();
                         break;
-                    case '/libros':
+                    case '/Reclusos':
                         fetchedData = await getLibros();
                         break;
-                    case '/prestamos':
+                    case '/Penales':
                         fetchedData = await getPrestamos();
                         break;
-                    case '/editoriales':
+                    case '/Empleados':
                         fetchedData = await getEditoriales();
                         break;
                     default:
@@ -90,55 +90,55 @@ const DataLoader = () => {
     return (
         <Routes>
             <Route
-                path="/libros"
+                path="/Reclusos"
                 element={
                     <CommonPage
-                        title="Libros"
+                        title="Reclusos"
                         icon="bi-book"
-                        tableName="Libros Table"
+                        tableName="Reclusos Table"
                         tableData={data}
-                        columnHeaders={tableHeaders['/libros']}
+                        columnHeaders={tableHeaders['/Reclusos']}
                         showAddButton={true}
-                        FormComponent={(props) => <FormularioLibros {...props} TitleForm="Agregar Libro" />}
-                        EditComponent={(props) => <FormularioLibros {...props} TitleForm="Editar Libro" />}
+                        FormComponent={(props) => <FormularioLibros {...props} TitleForm="Agregar Recluso" />}
+                        EditComponent={(props) => <FormularioLibros {...props} TitleForm="Editar Recluso" />}
                     />
                 }
             />
             <Route
-                path="/prestamos"
+                path="/Penales"
                 element={
                     <CommonPage
-                        title="Préstamos"
+                        title="Penales"
                         icon="bi-journal-arrow-up"
-                        tableName="Préstamos Table"
+                        tableName="Penales Table"
                         tableData={data}
-                        columnHeaders={tableHeaders['/prestamos']}
+                        columnHeaders={tableHeaders['/Penales']}
                         showAddButton={false}
                     />
                 }
             />
             <Route
-                path="/editoriales"
+                path="/Empleados"
                 element={
                     <CommonPage
-                        title="Editoriales"
+                        title="Empleados"
                         icon="bi-building"
-                        tableName="Editoriales Table"
+                        tableName="Empleados Table"
                         tableData={data}
-                        columnHeaders={tableHeaders['/editoriales']}
+                        columnHeaders={tableHeaders['/Empleados']}
                         showAddButton={false}
                     />
                 }
             />
             <Route
-                path="/usuarios"
+                path="/Planillas"
                 element={
                     <CommonPage
-                        title="Usuarios"
+                        title="Planilla"
                         icon="bi-people-fill"
-                        tableName="Usuarios Table"
+                        tableName="Planillas Table"
                         tableData={data}
-                        columnHeaders={tableHeaders['/usuarios']}
+                        columnHeaders={tableHeaders['/Planillas']}
                         showAddButton={false}
                     />
                 }

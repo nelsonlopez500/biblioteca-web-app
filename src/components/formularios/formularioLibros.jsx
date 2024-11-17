@@ -5,12 +5,16 @@ import { createLibro } from '../../services/apisService.jsx';
 
 const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
     const [libro, setLibro] = useState({
-        titulo: '',
-        isbn: '',
-        fecha_publicacion: '',
-        editorial_id: '',
-        categoria_id: '',
-        biblioteca_id: '',
+        nombre: '',
+        apellido: '',
+        fecha_ingreso: '',
+        genero: '',
+        nacionalidad: '',
+        condena: '',
+        pandilla: '',
+        id_antecedente: '',
+        id_incidentes: '',
+        estado: '',
         status: true
     });
     const [error, setError] = useState(null);
@@ -32,12 +36,16 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
             handleClose();
             // Limpiar formulario
             setLibro({
-                titulo: '',
-                isbn: '',
-                fecha_publicacion: '',
-                editorial_id: '',
-                categoria_id: '',
-                biblioteca_id: '',
+                nombre: '',
+                apellido: '',
+                fecha_ingreso: '',
+                genero: '',
+                nacionalidad: '',
+                condena: '',
+                pandilla: '',
+                id_antecedente: '',
+                id_incidentes: '',
+                estado: '',
                 status: true
             });
         } catch (error) {
@@ -51,11 +59,7 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
     return (
         <>
             <div className="modal-overlay">
-                <div
-                    className="modal show"
-                    style={{ display: 'block' }}
-                    tabIndex="-1"
-                >
+                <div className="modal show" style={{ display: 'block' }} tabIndex="-1">
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -71,89 +75,130 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
                             <div className="modal-body">
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-3">
-                                        <label className="form-label">Título</label>
+                                        <label className="form-label">Nombre</label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            name="titulo"
-                                            value={libro.titulo}
+                                            name="nombre"
+                                            value={libro.nombre}
                                             onChange={handleChange}
                                             required
-                                            placeholder="Ingrese el título del libro"
+                                            placeholder="Ingrese el nombre del recluso"
                                         />
                                     </div>
 
                                     <div className="mb-3">
-                                        <label className="form-label">ISBN</label>
+                                        <label className="form-label">Apellido</label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            name="isbn"
-                                            value={libro.isbn}
+                                            name="apellido"
+                                            value={libro.apellido}
                                             onChange={handleChange}
                                             required
-                                            placeholder="Ingrese el ISBN"
+                                            placeholder="Ingrese el apellido del recluso"
                                         />
                                     </div>
 
                                     <div className="mb-3">
-                                        <label className="form-label">Fecha de Publicación</label>
+                                        <label className="form-label">Fecha de Ingreso</label>
                                         <input
                                             type="date"
                                             className="form-control"
-                                            name="fecha_publicacion"
-                                            value={libro.fecha_publicacion}
+                                            name="fecha_ingreso"
+                                            value={libro.fecha_ingreso}
                                             onChange={handleChange}
                                         />
                                     </div>
 
                                     <div className="mb-3">
-                                        <label className="form-label">Editorial</label>
-                                        <select
-                                            className="form-select"
-                                            name="editorial_id"
-                                            value={libro.editorial_id}
+                                        <label className="form-label">Género</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="genero"
+                                            value={libro.genero}
                                             onChange={handleChange}
                                             required
-                                        >
-                                            <option value="" disabled>Seleccione una editorial</option>
-                                            <option value="1">Editorial LPGL</option>
-                                        </select>
+                                            placeholder="Ingrese el género"
+                                        />
                                     </div>
 
                                     <div className="mb-3">
-                                        <label className="form-label">Categoría</label>
-                                        <select
-                                            className="form-select"
-                                            name="categoria_id"
-                                            value={libro.categoria_id}
+                                        <label className="form-label">Nacionalidad</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="nacionalidad"
+                                            value={libro.nacionalidad}
                                             onChange={handleChange}
                                             required
-                                        >
-                                            <option value="" disabled>Seleccione una categoría</option>
-                                            <option value="1">Ficción</option>
-                                            <option value="3">Ciencia</option>
-                                            <option value="4">Tecnología</option>
-                                            <option value="5">Historia</option>
-                                            <option value="28">Arte</option>
-                                            <option value="29">Música Clásica</option>
-                                            <option value="30">Bibliografías</option>
-                                            <option value="31">Aventuras</option>
-                                        </select>
+                                            placeholder="Ingrese la nacionalidad"
+                                        />
                                     </div>
 
                                     <div className="mb-3">
-                                        <label className="form-label">Biblioteca</label>
-                                        <select
-                                            className="form-select"
-                                            name="biblioteca_id"
-                                            value={libro.biblioteca_id}
+                                        <label className="form-label">Condena</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="condena"
+                                            value={libro.condena}
                                             onChange={handleChange}
                                             required
-                                        >
-                                            <option value="" disabled>Seleccione una biblioteca</option>
-                                            <option value="1">BiblioTK</option>
-                                        </select>
+                                            placeholder="Ingrese la condena"
+                                        />
+                                    </div>
+
+                                    <div className="mb-3">
+                                        <label className="form-label">Pandilla</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="pandilla"
+                                            value={libro.pandilla}
+                                            onChange={handleChange}
+                                            placeholder="Ingrese la pandilla (si aplica)"
+                                        />
+                                    </div>
+
+                                    <div className="mb-3">
+                                        <label className="form-label">ID de Antecedente</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="id_antecedente"
+                                            value={libro.id_antecedente}
+                                            onChange={handleChange}
+                                            required
+                                            placeholder="Ingrese el ID de antecedente"
+                                        />
+                                    </div>
+
+                                    <div className="mb-3">
+                                        <label className="form-label">ID de Incidentes</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="id_incidentes"
+                                            value={libro.id_incidentes}
+                                            onChange={handleChange}
+                                            required
+                                            placeholder="Ingrese el ID de incidentes"
+                                        />
+                                    </div>
+
+                                    <div className="mb-3">
+                                        <label className="form-label">Estado</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="estado"
+                                            value={libro.estado}
+                                            onChange={handleChange}
+                                            required
+                                            placeholder="Ingrese el estado del recluso"
+                                        />
                                     </div>
 
                                     <div className="modal-footer">

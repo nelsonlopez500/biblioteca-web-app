@@ -20,9 +20,9 @@ const Sidebar = () => {
     };
 
     return (
-        <div 
-            className={`sidebar ${isOpen ? 'open' : ''}`} 
-            onMouseEnter={handleMouseEnter} 
+        <div
+            className={`sidebar ${isOpen ? 'open' : ''}`}
+            onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
             <div className="sidebar-header">
@@ -31,6 +31,7 @@ const Sidebar = () => {
             </div>
             <nav className="sidebar-nav">
                 <ul>
+                    <li><Link to="/">Inicio</Link></li>
                     <li><Link to="/Reclusos">Reclusos</Link></li>
                     <li><Link to="/Penales">Penales</Link></li>
                     <li><Link to="/Empleados">Empleados</Link></li>

@@ -3,6 +3,8 @@ import Navbar from '../../components/navBar/navBar.jsx';
 import Sidebar from '../../components/sideBar/sideBar.jsx';
 import TableComponent from '../../components/tables/TableComponent.jsx';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import {deleteLibro } from '../../services/apisService.jsx';
+
 import './Commonpage.css';
 
 const CommonPage = ({ 
@@ -13,7 +15,11 @@ const CommonPage = ({
     showAddButton = false, 
     FormComponent, 
     EditComponent,
-    columnHeaders = [] // Nueva prop para los encabezados
+    columnHeaders = [],
+    deleteMethod, // Nueva prop
+    entityName = 'registro', // Nueva prop
+    idField // Nueva prop
+
 }) => {
     const [showModal, setShowModal] = useState(false);
 
@@ -49,6 +55,9 @@ const CommonPage = ({
                             columns={columnHeaders} 
                             showEditButton={true}
                             EditComponent={EditComponent}
+                            deleteMethod={deleteMethod}
+                            entityName={entityName}
+                            idField={idField}
                         />
                     </div>
                 </div>

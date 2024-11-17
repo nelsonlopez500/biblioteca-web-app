@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
 import CommonPage from '../../pages/commonPage/Commonpage.jsx';
-import { getUsers, getLibros, getPrestamos, getEditoriales } from '../../services/apisService.jsx';
+import { getUsers, getLibros, getPrestamos, getEditoriales, deleteLibro, deleteUsuario } from '../../services/apisService.jsx';
 import FormularioLibros from '../formularios/formularioLibros.jsx';
 import FormularioUsuario from '../formularios/formularioUsario/formularioUsuario.jsx';
 
@@ -102,6 +102,9 @@ const DataLoader = () => {
                         showAddButton={true}
                         FormComponent={(props) => <FormularioLibros {...props} TitleForm="Agregar Libro" />}
                         EditComponent={(props) => <FormularioLibros {...props} TitleForm="Editar Libro" />}
+                        deleteMethod={deleteLibro}
+                        entityName="libro"
+                        idField="libro_id"
                     />
                 }
             />
@@ -143,6 +146,9 @@ const DataLoader = () => {
                         showAddButton={true}
                         FormComponent={(props) => <FormularioUsuario {...props} TitleForm="Agregar Uusario" />}
                         EditComponent={(props) => <FormularioUsuario {...props} TitleForm="Editar Usuario" />}
+                        deleteMethod={deleteUsuario}
+                        entityName="usuario"
+                        idField="usuario_id"
                     />
                 }
             />

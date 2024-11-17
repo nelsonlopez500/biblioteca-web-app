@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { deleteLibro } from '../../services/apisService';
 import './TableComponent.css';
 
 const TableComponent = ({ 
@@ -9,7 +8,10 @@ const TableComponent = ({
     data, 
     columns = [], 
     showEditButton = false, 
-    EditComponent 
+    EditComponent,
+    deleteMethod, // Nueva prop
+    entityName = 'registro', // Nueva prop
+    idField // Nueva prop
 }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortColumn, setSortColumn] = useState(null);
@@ -62,16 +64,14 @@ const TableComponent = ({
 
     const handleDelete = async (row) => {
         try {
-            // Confirmación antes de eliminar
-            const isConfirmed = window.confirm('¿Está seguro que desea eliminar este libro?');
+            const isConfirmed = window.confirm(`¿Está seguro que desea eliminar este ${entityName}?`);
             
             if (isConfirmed) {
-                await deleteLibro(row.libro_id);
+                await deleteMethod(row[idField]);
                 window.location.reload();
             }
         } catch (error) {
-            console.error('Error al eliminar libro:', error);
-            // Aquí puedes manejar la visualización del error
+            console.error(`Error al eliminar ${entityName}:`, error);
         }
     };
 

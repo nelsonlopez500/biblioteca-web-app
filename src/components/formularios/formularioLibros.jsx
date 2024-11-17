@@ -14,8 +14,7 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
         pandilla: '',
         id_antecedente: '',
         id_incidentes: '',
-        estado: '',
-        status: true
+        status: true // Estado predeterminado en 1 (true)
     });
     const [error, setError] = useState(null);
 
@@ -45,8 +44,7 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
                 pandilla: '',
                 id_antecedente: '',
                 id_incidentes: '',
-                estado: '',
-                status: true
+                status: true // Estado predeterminado en 1 (true)
             });
         } catch (error) {
             setError('Error al crear el libro');
@@ -113,15 +111,19 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
 
                                     <div className="mb-3">
                                         <label className="form-label">Género</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
+                                        <select
+                                            className="form-select"
                                             name="genero"
                                             value={libro.genero}
                                             onChange={handleChange}
                                             required
-                                            placeholder="Ingrese el género"
-                                        />
+                                        >
+                                            <option value="" disabled>
+                                                Seleccione el género
+                                            </option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Femenino">Femenino</option>
+                                        </select>
                                     </div>
 
                                     <div className="mb-3">
@@ -163,42 +165,61 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
                                     </div>
 
                                     <div className="mb-3">
-                                        <label className="form-label">ID de Antecedente</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
+                                        <label className="form-label">Antecedente</label>
+                                        <select
+                                            className="form-select"
                                             name="id_antecedente"
                                             value={libro.id_antecedente}
                                             onChange={handleChange}
                                             required
-                                            placeholder="Ingrese el ID de antecedente"
-                                        />
+                                        >
+                                            <option value="" disabled>
+                                                Seleccione un antecedente
+                                            </option>
+                                            <option value="1">Robo</option>
+                                            <option value="2">Homicidio</option>
+                                            <option value="3">Tráfico de drogas</option>
+                                            <option value="4">Asalto</option>
+                                            <option value="5">Fraude</option>
+                                            <option value="6">Violencia doméstica</option>
+                                            <option value="7">Extorsión</option>
+                                            <option value="8">Secuestro</option>
+                                            <option value="9">Deserción</option>
+                                            <option value="10">Delito de odio</option>
+                                            <option value="11">Amenazas</option>
+                                            <option value="12">Reincidente</option>
+                                            <option value="13">Desorden público</option>
+                                            <option value="14">Condena de 20 años</option>
+                                        </select>
                                     </div>
 
                                     <div className="mb-3">
-                                        <label className="form-label">ID de Incidentes</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
+                                        <label className="form-label">Incidentes</label>
+                                        <select
+                                            className="form-select"
                                             name="id_incidentes"
                                             value={libro.id_incidentes}
                                             onChange={handleChange}
                                             required
-                                            placeholder="Ingrese el ID de incidentes"
-                                        />
-                                    </div>
-
-                                    <div className="mb-3">
-                                        <label className="form-label">Estado</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="estado"
-                                            value={libro.estado}
-                                            onChange={handleChange}
-                                            required
-                                            placeholder="Ingrese el estado del recluso"
-                                        />
+                                        >
+                                            <option value="" disabled>
+                                                Seleccione un incidente
+                                            </option>
+                                            <option value="1">Riña</option>
+                                            <option value="2">Fuga</option>
+                                            <option value="3">Motín</option>
+                                            <option value="4">Huelga</option>
+                                            <option value="5">Agresión</option>
+                                            <option value="6">Incendio</option>
+                                            <option value="7">Agujeros de Seguridad</option>
+                                            <option value="8">Contrabando</option>
+                                            <option value="9">Desmayos</option>
+                                            <option value="10">Enfermedad</option>
+                                            <option value="11">Violación de Derechos</option>
+                                            <option value="12">Escapes Masivos</option>
+                                            <option value="13">Conflictos entre bandas</option>
+                                            <option value="14">Insultos a personal</option>
+                                        </select>
                                     </div>
 
                                     <div className="modal-footer">

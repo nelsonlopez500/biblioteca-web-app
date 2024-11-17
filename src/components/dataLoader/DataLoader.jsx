@@ -3,6 +3,7 @@ import { useLocation, Routes, Route } from 'react-router-dom';
 import CommonPage from '../../pages/commonPage/Commonpage.jsx';
 import { getUsers, getLibros, getPrestamos, getEditoriales } from '../../services/apisService.jsx';
 import FormularioLibros from '../formularios/formularioLibros.jsx';
+import FormularioUsuario from '../formularios/formularioUsario/formularioUsuario.jsx';
 
 const DataLoader = () => {
     const [data, setData] = useState([]);
@@ -139,7 +140,9 @@ const DataLoader = () => {
                         tableName="Usuarios Table"
                         tableData={data}
                         columnHeaders={tableHeaders['/usuarios']}
-                        showAddButton={false}
+                        showAddButton={true}
+                        FormComponent={(props) => <FormularioUsuario {...props} TitleForm="Agregar Uusario" />}
+                        EditComponent={(props) => <FormularioUsuario {...props} TitleForm="Editar Usuario" />}
                     />
                 }
             />

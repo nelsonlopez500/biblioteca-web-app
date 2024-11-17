@@ -100,6 +100,7 @@ const DataLoader = () => {
                         tableData={data}
                         columnHeaders={tableHeaders['/libros']}
                         showAddButton={true}
+                        showEditButton={true}
                         FormComponent={(props) => <FormularioLibros {...props} TitleForm="Agregar Libro" />}
                         EditComponent={(props) => <FormularioLibros {...props} TitleForm="Editar Libro" />}
                         deleteMethod={deleteLibro}
@@ -118,6 +119,8 @@ const DataLoader = () => {
                         tableData={data}
                         columnHeaders={tableHeaders['/prestamos']}
                         showAddButton={false}
+                        showEditButton={false}
+
                     />
                 }
             />
@@ -131,6 +134,8 @@ const DataLoader = () => {
                         tableData={data}
                         columnHeaders={tableHeaders['/editoriales']}
                         showAddButton={false}
+                        showEditButton={true}
+
                     />
                 }
             />
@@ -144,6 +149,7 @@ const DataLoader = () => {
                         tableData={data}
                         columnHeaders={tableHeaders['/usuarios']}
                         showAddButton={true}
+                        showEditButton={true}
                         FormComponent={(props) => <FormularioUsuario {...props} TitleForm="Agregar Uusario" />}
                         EditComponent={(props) => <FormularioUsuario {...props} TitleForm="Editar Usuario" />}
                         deleteMethod={deleteUsuario}

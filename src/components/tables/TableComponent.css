@@ -59,3 +59,31 @@
     color: #343a40; /* Color del texto */
     font-weight: bold; /* Texto en negrita */
 }
+
+/* Estilo para el contenedor del botón */
+.d-flex.justify-content-end.mb-3 {
+    width: 100%;
+}
+
+/* Estilo para el botón de exportación */
+.export-button {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+    margin-left: auto;
+    margin-bottom: 0.5rem;
+    width: auto;
+    display: inline-block;
+    white-space: nowrap;
+    min-width: fit-content;
+    background-color: #0d9457 !important; /* Verde más oscuro */
+}
+
+.export-button:hover {
+    background-color: #0f5132 !important; /* Aún más oscuro en hover */
+}
+
+/* Ajustar el ícono dentro del botón */
+.export-button i {
+    font-size: 0.8rem;
+    margin-right: 0.3rem;
+}

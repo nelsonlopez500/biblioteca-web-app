@@ -13,6 +13,7 @@ const CommonPage = ({
     tableData = [], 
     tableName = "Default Table Name", 
     showAddButton = false, 
+    showEditButton = false,
     FormComponent, 
     EditComponent,
     columnHeaders = [],
@@ -53,7 +54,7 @@ const CommonPage = ({
                             tableName={tableName}
                             data={tableData}
                             columns={columnHeaders} 
-                            showEditButton={true}
+                            showEditButton={showEditButton}
                             EditComponent={EditComponent}
                             deleteMethod={deleteMethod}
                             entityName={entityName}

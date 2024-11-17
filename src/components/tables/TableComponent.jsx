@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './TableComponent.css';
+import * as XLSX from 'xlsx';
 
-const TableComponent = ({ 
-    tableName, 
-    data, 
-    columns = [], 
-    showEditButton = false, 
+
+const TableComponent = ({
+    tableName,
+    data,
+    columns = [],
+    showEditButton = false,
     EditComponent,
     deleteMethod, // Nueva prop
     entityName = 'registro', // Nueva prop
@@ -38,7 +40,7 @@ const TableComponent = ({
 
     const sortedData = [...data].sort((a, b) => {
         if (!sortColumn) return 0;
-        
+
         const aValue = a[sortColumn];
         const bValue = b[sortColumn];
 
@@ -48,6 +50,15 @@ const TableComponent = ({
             return bValue < aValue ? -1 : bValue > aValue ? 1 : 0;
         }
     });
+
+    const exportToExcel = () => {
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+        // Generar archivo y forzar descarga
+        XLSX.writeFile(workbook, `${tableName}.xlsx`);
+    };
 
     const handlePreviousPage = () => {
         setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
@@ -65,7 +76,7 @@ const TableComponent = ({
     const handleDelete = async (row) => {
         try {
             const isConfirmed = window.confirm(`¿Está seguro que desea eliminar este ${entityName}?`);
-            
+
             if (isConfirmed) {
                 await deleteMethod(row[idField]);
                 window.location.reload();
@@ -90,12 +101,21 @@ const TableComponent = ({
 
     return (
         <div className="table-container">
+            <div className="d-flex justify-content-end mb-3">
+                <button
+                    className="btn btn-success btn-sm export-button"
+                    onClick={exportToExcel}
+                >
+                    <i className="bi bi-file-earmark-excel me-1"></i>
+                    Exportar a Excel
+                </button>
+            </div>
             <div className="table-responsive">
                 <table className="table table-dark table-striped table-bordered">
                     <thead className="thead-dark">
                         <tr>
                             {tableColumns.map((column) => (
-                                <th 
+                                <th
                                     key={column.key}
                                     onClick={() => handleSort(column.key)}
                                     style={{ cursor: 'pointer' }}

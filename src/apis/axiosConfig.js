@@ -9,11 +9,11 @@ const createApiClient = (baseURL) => {
     });
 };
 
-export const usersApiClient = createApiClient(process.env.REACT_APP_USERS_API_URL);
-export const bibliotecasApiClient = createApiClient(process.env.REACT_APP_BIBLIOTECAS_API_URL);
-export const categoriasApiClient = createApiClient(process.env.REACT_APP_CATEGORIAS_API_URL);
-export const editorialesApiClient = createApiClient(process.env.REACT_APP_EDITORIALES_API_URL);
+export const reclusosApiClient = createApiClient(process.env.REACT_APP_RECLUSOS_API_URL);
+export const planillasApiClient = createApiClient(process.env.REACT_APP_PLANILLAS_API_URL);
+export const penalesApiClient = createApiClient(process.env.REACT_APP_PENALES_API_URL);
+export const empleadosApiClient = createApiClient(process.env.REACT_APP_EMPLEADOS_API_URL);
 export const librosApiClient = createApiClient(process.env.REACT_APP_LIBROS_API_URL);
 export const prestamosApiClient = createApiClient(process.env.REACT_APP_PRESTAMOS_API_URL);
-export const createLibroApiClient = createApiClient(process.env.REACT_APP_CREATE_LIBRO_API_URL);
-export const deleteLibroApiClient = createApiClient(process.env.REACT_APP_DELETE_LIBRO_API_URL);
+export const createReclusoApiClient = createApiClient(process.env.REACT_APP_CREATE_RECLUSO_API_URL);
+export const deleteReclusoApiClient = createApiClient(process.env.REACT_APP_DELETE_RECLUSO_API_URL);

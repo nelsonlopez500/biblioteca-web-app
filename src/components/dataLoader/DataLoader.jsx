@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
 import CommonPage from '../../pages/commonPage/Commonpage.jsx';
-import { getUsers, getLibros, getPrestamos, getEditoriales } from '../../services/apisService.jsx';
+import { getReclusos, getPlanillas, getPenales, getEmpleados } from '../../services/apisService.jsx';
 import FormularioLibros from '../formularios/formularioLibros.jsx';
 
 const DataLoader = () => {
@@ -10,41 +10,46 @@ const DataLoader = () => {
 
     // Definimos los encabezados para cada ruta
     const tableHeaders = {
-        '/Planilla': [
-            { key: 'libro_id', label: 'ID' },
-            { key: 'titulo', label: 'Título' },
-            { key: 'isbn', label: 'ISBN' },
-            { key: 'editorial_id', label: 'Editorial' },
-            { key: 'categoria_id', label: 'Categoría' },
-            { key: 'fecha_publicacion', label: 'Fecha Publicación' },
-            { key: 'status', label: 'Estado' }
-        ],
-        '/Reclusos': [
-            { key: 'usuario_id', label: 'ID' },
-            { key: 'nombre', label: 'Nombre' },
-            { key: 'apellido', label: 'Apellido' },
-            { key: 'email', label: 'Email' },
-            { key: 'rol_id', label: 'Rol' },
-            { key: 'status', label: 'Estado' },
-            { key: 'fecha_registro', label: 'Fecha Registro' },
-            { key: 'direccion', label: 'Dirección' },
-            { key: 'telefono', label: 'Teléfono' }
-        ],
-        '/Penales': [
-            { key: 'libro_id', label: 'Libro' },
-            { key: 'usuario_id', label: 'Usuario' },
-            { key: 'fecha_prestamo', label: 'Fecha Préstamo' },
-            { key: 'fecha_vencimiento', label: 'Fecha Vencimiento' },
-            { key: 'estado_prestamo', label: 'Estado' },
-            { key: 'biblioteca_id', label: 'Biblioteca' },
-            { key: 'created_at', label: 'Fecha Creación' }
-        ],
-        '/Empleados': [
-            { key: 'editorial_id', label: 'ID' },
-            { key: 'nombre_editorial', label: 'Nombre Editorial' },
-            { key: 'status', label: 'Estado' },
-            { key: 'created_at', label: 'Fecha Creación' }
+        '/Planillas': [
+            { key: 'id_planilla', label: 'ID Planilla' }, // Identificador único de la planilla
+            { key: 'id_empleado', label: 'ID Empleado' }, // Identificador del empleado
+            { key: 'id_cargo', label: 'ID Cargo' }, // Identificador del cargo del empleado
+            { key: 'fecha_inicio', label: 'Fecha de Inicio' }, // Fecha de inicio en la planilla
+            { key: 'salario', label: 'Salario' }, // Salario asignado
+            { key: 'status', label: 'Estado' } // Estado activo/inactivo
         ]
+        ,
+        '/Reclusos': [
+            { key: 'id_recluso', label: 'ID' },
+            { key: 'nombre', label: 'Nombre' }, // Nombre del recluso
+            { key: 'apellido', label: 'Apellido' }, // Apellido del recluso
+            { key: 'genero', label: 'Género' }, // Género del recluso
+            { key: 'nacionalidad', label: 'Nacionalidad' }, // Nacionalidad del recluso
+            { key: 'fecha_ingreso', label: 'Fecha de Ingreso' }, // Fecha de ingreso al sistema
+            { key: 'estado', label: 'Estado' }, // Estado activo/inactivo
+            { key: 'pandilla', label: 'Pandilla' }, // Asociación con pandilla
+            { key: 'condena', label: 'Condena' }, // Condena del recluso
+            { key: 'incidente', label: 'Incidente' }, // Último incidente reportado
+        ]
+        ,
+        '/Penales': [
+            { key: 'id_penal', label: 'ID Penal' }, // Identificador único del penal
+            { key: 'nombre', label: 'Nombre' }, // Nombre del penal
+            { key: 'direccion', label: 'Dirección' }, // Dirección del penal
+            { key: 'capacidad_celdas', label: 'Capacidad de Celdas' }, // Capacidad total de celdas
+            { key: 'capacidad_reos', label: 'Capacidad de Reos' }, // Capacidad total de reos
+            { key: 'status', label: 'Estado' } // Estado del penal (activo/inactivo)
+        ]
+        ,
+        '/Empleados': [
+            { key: 'id_empleado', label: 'ID Empleado' }, // Identificador único del empleado
+            { key: 'nombre', label: 'Nombre' }, // Nombre del empleado
+            { key: 'correo', label: 'Correo Electrónico' }, // Correo del empleado
+            { key: 'telefono', label: 'Teléfono' }, // Teléfono del empleado
+            { key: 'id_area', label: 'ID Área' }, // Área a la que pertenece el empleado
+            { key: 'estado', label: 'Estado' }, // Estado activo/inactivo (alternativo a 'status')
+        ]
+
     };
 
     // Función para ordenar datos
@@ -62,16 +67,16 @@ const DataLoader = () => {
                 let fetchedData = [];
                 switch (location.pathname) {
                     case '/Planillas':
-                        fetchedData = await getUsers();
+                        fetchedData = await getPlanillas();
                         break;
                     case '/Reclusos':
-                        fetchedData = await getLibros();
+                        fetchedData = await getReclusos();
                         break;
                     case '/Penales':
-                        fetchedData = await getPrestamos();
+                        fetchedData = await getPenales();
                         break;
                     case '/Empleados':
-                        fetchedData = await getEditoriales();
+                        fetchedData = await getEmpleados();
                         break;
                     default:
                         break;

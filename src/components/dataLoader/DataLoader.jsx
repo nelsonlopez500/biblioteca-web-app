@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
 import CommonPage from '../../pages/commonPage/Commonpage.jsx';
-import { getUsers, getLibros, getPrestamos, getEditoriales } from '../../services/apisService.jsx';
+import { getRecluso, getPenales, getEmpleados, getPlanillas } from '../../services/apisService.jsx';
 import FormularioLibros from '../formularios/formularioLibros.jsx';
 
 const DataLoader = () => {
@@ -10,41 +10,59 @@ const DataLoader = () => {
 
     // Definimos los encabezados para cada ruta
     const tableHeaders = {
-        '/libros': [
-            { key: 'libro_id', label: 'ID' },
-            { key: 'titulo', label: 'Título' },
-            { key: 'isbn', label: 'ISBN' },
-            { key: 'editorial_id', label: 'Editorial' },
-            { key: 'categoria_id', label: 'Categoría' },
-            { key: 'fecha_publicacion', label: 'Fecha Publicación' },
-            { key: 'status', label: 'Estado' }
-        ],
-        '/usuarios': [
-            { key: 'usuario_id', label: 'ID' },
+        '/reclusos':[
+            { key: 'id_recluso', label: 'ID' },
             { key: 'nombre', label: 'Nombre' },
             { key: 'apellido', label: 'Apellido' },
-            { key: 'email', label: 'Email' },
-            { key: 'rol_id', label: 'Rol' },
-            { key: 'status', label: 'Estado' },
-            { key: 'fecha_registro', label: 'Fecha Registro' },
-            { key: 'direccion', label: 'Dirección' },
-            { key: 'telefono', label: 'Teléfono' }
-        ],
-        '/prestamos': [
-            { key: 'libro_id', label: 'Libro' },
-            { key: 'usuario_id', label: 'Usuario' },
-            { key: 'fecha_prestamo', label: 'Fecha Préstamo' },
-            { key: 'fecha_vencimiento', label: 'Fecha Vencimiento' },
-            { key: 'estado_prestamo', label: 'Estado' },
-            { key: 'biblioteca_id', label: 'Biblioteca' },
-            { key: 'created_at', label: 'Fecha Creación' }
-        ],
-        '/editoriales': [
-            { key: 'editorial_id', label: 'ID' },
-            { key: 'nombre_editorial', label: 'Nombre Editorial' },
-            { key: 'status', label: 'Estado' },
-            { key: 'created_at', label: 'Fecha Creación' }
+            { key: 'genero', label: 'Género' },
+            { key: 'nacionalidad', label: 'Nacionalidad' },
+            { key: 'pandilla', label: 'Pandilla' },
+            { key: 'antecedente', label: 'Antecedente' },
+            { key: 'condena', label: 'Condena' },
+            //{ key: 'detalle_antecedente', label: 'Detalle Antecedente' },
+            //{ key: 'detalle_incidente', label: 'Detalle Incidente' },
+            { key: 'incidente', label: 'Incidente' },
+            { key: 'estado', label: 'Estado' },
+            { key: 'fecha_ingreso', label: 'Fecha Ingreso' },
+            //{ key: 'status', label: 'Status' }
         ]
+        ,
+        '/penales':[
+            /*{ key: 'id_admin', label: 'ID Admin' },
+            { key: 'id_departamento', label: 'ID Departamento' },
+            { key: 'id_empleado', label: 'ID Empleado' },
+            { key: 'id_equipo', label: 'ID Equipo' },
+            { key: 'id_municipio', label: 'ID Municipio' },
+            { key: 'id_penal', label: 'ID Penal' },
+            { key: 'id_programas', label: 'ID Programas' },
+            { key: 'id_tipo_penal', label: 'ID Tipo Penal' },
+            { key: 'id_traslado', label: 'ID Traslado' },*/
+            { key: 'nombre', label: 'Nombre' },
+            { key: 'direccion', label: 'Dirección' },
+            { key: 'capacidad_celdas', label: 'Capacidad Celdas' },
+            { key: 'capacidad_reos', label: 'Capacidad Reos' },
+            //{ key: 'status', label: 'Status' }
+        ]
+        ,
+        '/empleados':[
+            //{ key: 'id_area', label: 'ID Área' },
+            //{ key: 'id_empleado', label: 'ID Empleado' },
+            { key: 'nombre', label: 'Nombre' },
+            { key: 'correo', label: 'Correo' },
+            { key: 'telefono', label: 'Teléfono' },
+            { key: 'estado', label: 'Estado' },
+            //{ key: 'status', label: 'Status' }
+        ]
+        ,
+        '/planillas':[
+            { key: 'fecha_inicio', label: 'Fecha Inicio' },
+            { key: 'id_cargo', label: 'ID Cargo' },
+            { key: 'id_empleado', label: 'ID Empleado' },
+            { key: 'id_planilla', label: 'ID Planilla' },
+            { key: 'salario', label: 'Salario' },
+            //{ key: 'status', label: 'Status' }
+        ]
+        
     };
 
     // Función para ordenar datos
@@ -61,17 +79,17 @@ const DataLoader = () => {
             try {
                 let fetchedData = [];
                 switch (location.pathname) {
-                    case '/usuarios':
-                        fetchedData = await getUsers();
+                    case '/reclusos':
+                        fetchedData = await getRecluso();
                         break;
-                    case '/libros':
-                        fetchedData = await getLibros();
+                    case '/penales':
+                        fetchedData = await getPenales();
                         break;
-                    case '/prestamos':
-                        fetchedData = await getPrestamos();
+                    case '/empleados':
+                        fetchedData = await getEmpleados();
                         break;
-                    case '/editoriales':
-                        fetchedData = await getEditoriales();
+                    case '/planillas':
+                        fetchedData = await getPlanillas();
                         break;
                     default:
                         break;
@@ -90,55 +108,55 @@ const DataLoader = () => {
     return (
         <Routes>
             <Route
-                path="/libros"
+                path="/reclusos"
                 element={
                     <CommonPage
-                        title="Libros"
+                        title="reclusos"
                         icon="bi-book"
                         tableName="Libros Table"
                         tableData={data}
-                        columnHeaders={tableHeaders['/libros']}
+                        columnHeaders={tableHeaders['/reclusos']}
                         showAddButton={true}
-                        FormComponent={(props) => <FormularioLibros {...props} TitleForm="Agregar Libro" />}
-                        EditComponent={(props) => <FormularioLibros {...props} TitleForm="Editar Libro" />}
+                        FormComponent={(props) => <FormularioLibros {...props} TitleForm="Agregar recluso" />}
+                        EditComponent={(props) => <FormularioLibros {...props} TitleForm="Editar recluso" />}
                     />
                 }
             />
             <Route
-                path="/prestamos"
+                path="/penales"
                 element={
                     <CommonPage
-                        title="Préstamos"
+                        title="Penales"
                         icon="bi-journal-arrow-up"
                         tableName="Préstamos Table"
                         tableData={data}
-                        columnHeaders={tableHeaders['/prestamos']}
+                        columnHeaders={tableHeaders['/penales']}
                         showAddButton={false}
                     />
                 }
             />
             <Route
-                path="/editoriales"
+                path="/empleados"
                 element={
                     <CommonPage
-                        title="Editoriales"
+                        title="Empleados"
                         icon="bi-building"
                         tableName="Editoriales Table"
                         tableData={data}
-                        columnHeaders={tableHeaders['/editoriales']}
+                        columnHeaders={tableHeaders['/empleados']}
                         showAddButton={false}
                     />
                 }
             />
             <Route
-                path="/usuarios"
+                path="/planillas"
                 element={
                     <CommonPage
-                        title="Usuarios"
+                        title="Planillas"
                         icon="bi-people-fill"
                         tableName="Usuarios Table"
                         tableData={data}
-                        columnHeaders={tableHeaders['/usuarios']}
+                        columnHeaders={tableHeaders['/planillas']}
                         showAddButton={false}
                     />
                 }

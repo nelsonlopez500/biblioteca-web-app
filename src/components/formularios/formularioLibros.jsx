@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FormularioLibros.css';
-import { createLibro } from '../../services/apisService.jsx';
+import { createrecluso } from '../../services/apisService.jsx';
 
 const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
     const [libro, setLibro] = useState({
@@ -27,7 +27,7 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
         e.preventDefault();
         setError(null);
         try {
-            const result = await createLibro(libro);
+            const result = await createrecluso(libro);
             onSubmit(result);
             handleClose();
             // Limpiar formulario

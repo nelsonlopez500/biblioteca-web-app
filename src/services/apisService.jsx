@@ -1,42 +1,42 @@
-import { usersApiClient, librosApiClient, prestamosApiClient, editorialesApiClient, createLibroApiClient, deleteLibroApiClient } from '../apis/axiosConfig';
+import {  deletereclusoApiClient, penalesApiClient, empleadosApiClient, planillasApiClient, createreclusoApiClient, reclusosApiClient } from '../apis/axiosConfig';
 
-// Métodos para la API de usuarios
-export const getUsers = async () => {
+// Métodos para la API de recluso
+export const getRecluso = async () => {
     try {
-        const response = await usersApiClient.get();
+        const response = await reclusosApiClient.get();
         return response.data;
     } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error('Error fetching reclusos:', error);
         throw error;
     }
 };
 
-// Métodos para la API de libros
-export const getLibros = async () => {
+// Métodos para la API de penales
+export const getPenales = async () => {
     try {
-        const response = await librosApiClient.get();
+        const response = await penalesApiClient.get();
         return response.data;
     } catch (error) {
-        console.error('Error fetching libros:', error);
+        console.error('Error fetching penales:', error);
         throw error;
     }
 };
 
-// Métodos para la API de préstamos
-export const getPrestamos = async () => {
+// Métodos para la API de empleados
+export const getEmpleados = async () => {
     try {
-        const response = await prestamosApiClient.get();
+        const response = await empleadosApiClient.get();
         return response.data;
     } catch (error) {
-        console.error('Error fetching prestamos:', error);
+        console.error('Error fetching empleados:', error);
         throw error;
     }
 };
 
 // Métodos para la API de editoriales
-export const getEditoriales = async () => {
+export const getPlanillas = async () => {
     try {
-        const response = await editorialesApiClient.get();
+        const response = await planillasApiClient.get();
         return response.data;
     } catch (error) {
         console.error('Error fetching editoriales:', error);
@@ -45,23 +45,23 @@ export const getEditoriales = async () => {
 };
 
 //Metodo para crear un nuevo libro
-export const createLibro = async (libro) => {
+export const createrecluso = async (recluso) => {
     try {
-        const response = await createLibroApiClient.post('', libro);
+        const response = await createreclusoApiClient.post('', recluso);
         return response.data;
     } catch (error) {
-        console.error('Error creating libro:', error);
+        console.error('Error creating recluso:', error);
         throw error;
     }
 };
 
 //Metodo para eliminar un libro
-export const deleteLibro = async (libroId) => {
+export const deleteRecluso = async (reclusoid) => {
     try {
-        const response = await deleteLibroApiClient.delete(`/${libroId}`);
+        const response = await deletereclusoApiClient.delete(`/${reclusoid}`);
         return response.data;
     } catch (error) {
-        console.error('Error deleting libro:', error);
+        console.error('Error deleting recluso:', error);
         throw error;
     }
 };

@@ -21,32 +21,32 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="cards-container">
-                <div className="card" onClick={() => handleCardClick('/libros')}>
-                    <img src="https://climatica.coop/wp-content/uploads/2024/01/1280px-Books_HD_8314929977-900x600.jpg?w=390&q=90" className="card-img-top" alt="Libros" />
+                <div className="card" onClick={() => handleCardClick('/Reclusos')}>
+                    <img src="https://wallpapers.com/images/hd/jail-pictures-960-x-640-unr55l3mswbcng0v.jpg" className="card-img-top" alt="Reclusos" />
                     <div className="card-body">
                         <h3>Reclusos</h3>
-                        <p>Ir a la sección de Reclusos</p>
+                        <p>Ir a la sección de reclusos.</p>
                     </div>
                 </div>
-                <div className="card" onClick={() => handleCardClick('/prestamos')}>
-                    <img src="https://www.comunidadbaratz.com/wp-content/uploads/Hay-muchisimos-libros-en-las-bibliotecas-pero-solamente-unos-pocos-comparten-el-privilegio-de-ser-los-mas-prestados-1.jpg" className="card-img-top" alt="Préstamos" />
+                <div className="card" onClick={() => handleCardClick('/Penales')}>
+                    <img src="https://st2.depositphotos.com/1020618/6187/i/450/depositphotos_61876061-stock-photo-wooden-gavel-and-books-on.jpg" className="card-img-top" alt="Penales" />
                     <div className="card-body">
                         <h3>Penales</h3>
                         <p>Ir a la sección de Penales</p>
                     </div>
                 </div>
-                <div className="card" onClick={() => handleCardClick('/editoriales')}>
-                    <img src="https://p4.wallpaperbetter.com/wallpaper/944/111/648/book-books-culture-edition-wallpaper-preview.jpg" className="card-img-top" alt="Editoriales" />
+                <div className="card" onClick={() => handleCardClick('/Empleados')}>
+                    <img src="https://st.depositphotos.com/1518767/2406/i/450/depositphotos_24061705-stock-photo-group-of-with-different-jobs.jpg" className="card-img-top" alt="Empleados" />
                     <div className="card-body">
                         <h3>Empleados</h3>
                         <p>Ir a la sección de Empleados</p>
                     </div>
                 </div>
-                <div className="card" onClick={() => handleCardClick('/usuarios')}>
-                    <img src="https://www.creaxid.com.mx/blog/wp-content/uploads/2021/08/investigacion-usuarios.jpg" className="card-img-top" alt="Usuarios" />
+                <div className="card" onClick={() => handleCardClick('/Planillas')}>
+                    <img src="https://wvw.qupos.com/hubfs/pago-de-planillas.png" className="card-img-top" alt="Planilla" />
                     <div className="card-body">
-                        <h3>Planillas</h3>
-                        <p>Ir a la sección de Planillas</p>
+                        <h3>Planilla</h3>
+                        <p>Ir a la sección de Planilla</p>
                     </div>
                 </div>
             </div>

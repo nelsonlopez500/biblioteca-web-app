@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { deleteLibro } from '../../services/apisService';
+import { deleteRecluso } from '../../services/apisService';
 import './TableComponent.css';
 
 const TableComponent = ({ 
@@ -14,7 +14,7 @@ const TableComponent = ({
     const [currentPage, setCurrentPage] = useState(1);
     const [sortColumn, setSortColumn] = useState(null);
     const [sortDirection, setSortDirection] = useState('asc');
-    const itemsPerPage = 10;
+    const itemsPerPage = 5;
     const [showModal, setShowModal] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
 
@@ -63,14 +63,14 @@ const TableComponent = ({
     const handleDelete = async (row) => {
         try {
             // Confirmación antes de eliminar
-            const isConfirmed = window.confirm('¿Está seguro que desea eliminar este libro?');
+            const isConfirmed = window.confirm('¿Está seguro que desea eliminar este recluso?');
             
             if (isConfirmed) {
-                await deleteLibro(row.libro_id);
+                await deleteRecluso(row.libro_id);
                 window.location.reload();
             }
         } catch (error) {
-            console.error('Error al eliminar libro:', error);
+            console.error('Error al eliminar recluso:', error);
             // Aquí puedes manejar la visualización del error
         }
     };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { deleteRecluso } from '../../services/apisService';
+import { deleterecluso } from '../../services/apisService';
 import './TableComponent.css';
 
 const TableComponent = ({ 
@@ -66,7 +66,7 @@ const TableComponent = ({
             const isConfirmed = window.confirm('¿Está seguro que desea eliminar este recluso?');
             
             if (isConfirmed) {
-                await deleteRecluso(row.libro_id);
+                await deleterecluso(row.reclusoid);
                 window.location.reload();
             }
         } catch (error) {

@@ -55,8 +55,8 @@ export const createrecluso = async (recluso) => {
     }
 };
 
-//Metodo para eliminar un libro
-export const deleteRecluso = async (reclusoid) => {
+//Metodo para eliminar un recluso
+export const deleterecluso = async (reclusoid) => {
     try {
         const response = await deletereclusoApiClient.delete(`/${reclusoid}`);
         return response.data;

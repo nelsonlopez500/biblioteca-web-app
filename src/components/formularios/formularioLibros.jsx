@@ -28,13 +28,25 @@ const FormularioLibros = ({
     const [libro, setLibro] = useState(estadoInicial);
     const [error, setError] = useState(null);
 
+    // Mapeo de nacionalidades
+    const nacionalidadMap = {
+        "1": "Salvadoreño",
+        "2": "Guatemalteco",
+        "3": "Hondureño",
+        "4": "Nicaragüense",
+        "5": "Costarricense",
+        "6": "Panameño",
+        "7": "Beliceño",
+        "8": "Otros"
+    };
+
     // Cargar datos iniciales en modo edición
     useEffect(() => {
         if (isEditing && initialData) {
             // Asegurar que la fecha tenga el formato correcto para el input date
-            const fechaFormateada = initialData.fecha_ingreso ?
+            const fechaFormateada = initialData.fecha_ingreso ? 
                 new Date(initialData.fecha_ingreso).toISOString().split('T')[0] : '';
-    
+
             // Mapeo de textos a IDs para antecedentes
             const antecedentesMap = {
                 'Robo': '1',
@@ -52,7 +64,7 @@ const FormularioLibros = ({
                 'Desorden público': '13',
                 'Condena de 20 años': '14'
             };
-    
+
             // Mapeo de textos a IDs para incidentes
             const incidentesMap = {
                 'Riña': '1',
@@ -70,7 +82,7 @@ const FormularioLibros = ({
                 'Conflictos entre bandas': '13',
                 'Insultos a personal': '14'
             };
-    
+
             setLibro({
                 ...initialData,
                 fecha_ingreso: fechaFormateada,
@@ -120,8 +132,6 @@ const FormularioLibros = ({
             console.error(error);
         }
     };
-
-
 
     if (!show) return null;
 
@@ -199,15 +209,22 @@ const FormularioLibros = ({
 
                                     <div className="mb-3">
                                         <label className="form-label">Nacionalidad</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
+                                        <select
+                                            className="form-select"
                                             name="nacionalidad"
                                             value={libro.nacionalidad}
                                             onChange={handleChange}
                                             required
-                                            placeholder="Ingrese la nacionalidad"
-                                        />
+                                        >
+                                            <option value="" disabled>
+                                                Seleccione la nacionalidad
+                                            </option>
+                                            {Object.entries(nacionalidadMap).map(([key, value]) => (
+                                                <option key={key} value={key}>
+                                                    {value}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
 
                                     <div className="mb-3">

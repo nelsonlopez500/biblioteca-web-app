@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
 import CommonPage from '../../pages/commonPage/Commonpage.jsx';
-import { getReclusos, getPlanillas, getPenales, getEmpleados } from '../../services/apisService.jsx';
+import { getReclusos, getPlanillas, getPenales, getEmpleados, deleteRecluso, deletePlanilla } from '../../services/apisService.jsx';
 import FormularioLibros from '../formularios/formularioLibros.jsx';
 
 const DataLoader = () => {
@@ -106,6 +106,9 @@ const DataLoader = () => {
                         showAddButton={true}
                         FormComponent={(props) => <FormularioLibros {...props} TitleForm="Agregar Recluso" />}
                         EditComponent={(props) => <FormularioLibros {...props} TitleForm="Editar Recluso" />}
+                        deleteMethod={deleteRecluso} // metodo
+                        entityName="recluso" // single
+                        idField="id_recluso" // id, según db
                     />
                 }
             />
@@ -145,6 +148,9 @@ const DataLoader = () => {
                         tableData={data}
                         columnHeaders={tableHeaders['/Planillas']}
                         showAddButton={false}
+                        deleteMethod={deletePlanilla}
+                        entityName="planilla"
+                        idField="id_planilla"
                     />
                 }
             />

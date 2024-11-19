@@ -1,4 +1,4 @@
-import {createReclusoApiClient, deleteReclusoApiClient, reclusosApiClient, planillasApiClient, penalesApiClient, empleadosApiClient } from '../apis/axiosConfig';
+import {createReclusoApiClient, deleteReclusoApiClient, reclusosApiClient, planillasApiClient, penalesApiClient, empleadosApiClient, deletePlanillaApiClient } from '../apis/axiosConfig';
 
 // Métodos para la API de reclusos
 export const getReclusos = async () => {
@@ -62,6 +62,17 @@ export const deleteRecluso = async (libroId) => {
         return response.data;
     } catch (error) {
         console.error('Error deleting recluso:', error);
+        throw error;
+    }
+};
+
+//Metodo para eliminar una planilla
+export const deletePlanilla = async (planillaId) => {
+    try {
+        const response = await deletePlanillaApiClient.delete(`/${planillaId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting planilla:', error);
         throw error;
     }
 };

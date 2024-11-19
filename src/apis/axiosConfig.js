@@ -17,3 +17,4 @@ export const librosApiClient = createApiClient(process.env.REACT_APP_LIBROS_API_
 export const prestamosApiClient = createApiClient(process.env.REACT_APP_PRESTAMOS_API_URL);
 export const createReclusoApiClient = createApiClient(process.env.REACT_APP_CREATE_RECLUSO_API_URL);
 export const deleteReclusoApiClient = createApiClient(process.env.REACT_APP_DELETE_RECLUSO_API_URL);
+export const deletePlanillaApiClient = createApiClient(process.env.REACT_APP_DELETE_PLANILLA_API_URL);

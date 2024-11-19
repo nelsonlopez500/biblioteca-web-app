@@ -13,7 +13,11 @@ const CommonPage = ({
     showAddButton = false, 
     FormComponent, 
     EditComponent,
-    columnHeaders = [] // Nueva prop para los encabezados
+    columnHeaders = [], 
+    deleteMethod, 
+    entityName = 'registro', 
+    idField 
+
 }) => {
     const [showModal, setShowModal] = useState(false);
 
@@ -49,6 +53,9 @@ const CommonPage = ({
                             columns={columnHeaders} 
                             showEditButton={true}
                             EditComponent={EditComponent}
+                            deleteMethod={deleteMethod}
+                            entityName={entityName}
+                            idField={idField}
                         />
                     </div>
                 </div>

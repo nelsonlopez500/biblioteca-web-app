@@ -9,7 +9,10 @@ const TableComponent = ({
     data, 
     columns = [], 
     showEditButton = false, 
-    EditComponent 
+    EditComponent,
+    deleteMethod, 
+    entityName = 'registro', 
+    idField
 }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortColumn, setSortColumn] = useState(null);
@@ -62,16 +65,14 @@ const TableComponent = ({
 
     const handleDelete = async (row) => {
         try {
-            // Confirmación antes de eliminar
-            const isConfirmed = window.confirm('¿Está seguro que desea eliminar este libro?');
-            
+            const isConfirmed = window.confirm(`¿Está seguro que desea eliminar este ${entityName}?`);
+
             if (isConfirmed) {
-                await deleteRecluso(row.libro_id);
+                await deleteMethod(row[idField]);
                 window.location.reload();
             }
         } catch (error) {
-            console.error('Error al eliminar libro:', error);
-            // Aquí puedes manejar la visualización del error
+            console.error(`Error al eliminar ${entityName}:`, error);
         }
     };
 

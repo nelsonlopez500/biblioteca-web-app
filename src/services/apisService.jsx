@@ -1,4 +1,13 @@
-import {createReclusoApiClient, deleteReclusoApiClient, reclusosApiClient, planillasApiClient, penalesApiClient, empleadosApiClient, deletePlanillaApiClient } from '../apis/axiosConfig';
+import {
+    createReclusoApiClient,
+    deleteReclusoApiClient,
+    reclusosApiClient,
+    planillasApiClient,
+    penalesApiClient,
+    empleadosApiClient,
+    deletePlanillaApiClient,
+    updateReclusoApiClient
+} from '../apis/axiosConfig';
 
 // Métodos para la API de reclusos
 export const getReclusos = async () => {
@@ -7,6 +16,28 @@ export const getReclusos = async () => {
         return response.data;
     } catch (error) {
         console.error('Error fetching reclusos:', error);
+        throw error;
+    }
+};
+
+//Metodo para obtener un recluso por su id
+export const getReclusoById = async (id) => {
+    try {
+        const response = await reclusosApiClient.get(`/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching recluso:', error);
+        throw error;
+    }
+};
+
+//Metodo para actualizar un recluso
+export const updateRecluso = async (recluso) => {
+    try {
+        const response = await updateReclusoApiClient.put(`/${recluso.id_recluso}`, recluso);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating recluso:', error);
         throw error;
     }
 };

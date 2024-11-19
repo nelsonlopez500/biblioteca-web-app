@@ -16,7 +16,8 @@ const CommonPage = ({
     columnHeaders = [], 
     deleteMethod, 
     entityName = 'registro', 
-    idField 
+    idField,
+    onRowSelect
 
 }) => {
     const [showModal, setShowModal] = useState(false);
@@ -56,6 +57,7 @@ const CommonPage = ({
                             deleteMethod={deleteMethod}
                             entityName={entityName}
                             idField={idField}
+                            onRowSelect={onRowSelect}
                         />
                     </div>
                 </div>

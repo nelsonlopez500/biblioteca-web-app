@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FormularioLibros.css';
-import {createRecluso } from '../../services/apisService.jsx';
 
-const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
-    const [libro, setLibro] = useState({
+const FormularioLibros = ({
+    show,
+    handleClose,
+    onSubmit,
+    TitleForm,
+    initialData,
+    isEditing,
+    submitAction
+}) => {
+
+    const estadoInicial = {
         nombre: '',
         apellido: '',
         fecha_ingreso: '',
@@ -14,9 +22,66 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
         pandilla: '',
         id_antecedente: '',
         id_incidentes: '',
-        status: true // Estado predeterminado en 1 (true)
-    });
+        status: true
+    };
+
+    const [libro, setLibro] = useState(estadoInicial);
     const [error, setError] = useState(null);
+
+    // Cargar datos iniciales en modo edición
+    useEffect(() => {
+        if (isEditing && initialData) {
+            // Asegurar que la fecha tenga el formato correcto para el input date
+            const fechaFormateada = initialData.fecha_ingreso ?
+                new Date(initialData.fecha_ingreso).toISOString().split('T')[0] : '';
+    
+            // Mapeo de textos a IDs para antecedentes
+            const antecedentesMap = {
+                'Robo': '1',
+                'Homicidio': '2',
+                'Tráfico de drogas': '3',
+                'Asalto': '4',
+                'Fraude': '5',
+                'Violencia doméstica': '6',
+                'Extorsión': '7',
+                'Secuestro': '8',
+                'Deserción': '9',
+                'Delito de odio': '10',
+                'Amenazas': '11',
+                'Reincidente': '12',
+                'Desorden público': '13',
+                'Condena de 20 años': '14'
+            };
+    
+            // Mapeo de textos a IDs para incidentes
+            const incidentesMap = {
+                'Riña': '1',
+                'Fuga': '2',
+                'Motín': '3',
+                'Huelga': '4',
+                'Agresión': '5',
+                'Incendio': '6',
+                'Agujeros de Seguridad': '7',
+                'Contrabando': '8',
+                'Desmayos': '9',
+                'Enfermedad': '10',
+                'Violación de Derechos': '11',
+                'Escapes Masivos': '12',
+                'Conflictos entre bandas': '13',
+                'Insultos a personal': '14'
+            };
+    
+            setLibro({
+                ...initialData,
+                fecha_ingreso: fechaFormateada,
+                // Buscar el ID correspondiente al texto o dejar vacío si no se encuentra
+                id_antecedente: antecedentesMap[initialData.antecedente] || '',
+                id_incidentes: incidentesMap[initialData.incidente] || ''
+            });
+        } else {
+            setLibro(estadoInicial);
+        }
+    }, [isEditing, initialData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -30,27 +95,33 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
         e.preventDefault();
         setError(null);
         try {
-            const result = await createRecluso(libro);
+            // Usar submitAction que viene como prop (createRecluso o updateRecluso)
+            const result = await submitAction(libro);
             onSubmit(result);
             handleClose();
-            // Limpiar formulario
-            setLibro({
-                nombre: '',
-                apellido: '',
-                fecha_ingreso: '',
-                genero: '',
-                nacionalidad: '',
-                condena: '',
-                pandilla: '',
-                id_antecedente: '',
-                id_incidentes: '',
-                status: true // Estado predeterminado en 1 (true)
-            });
+
+            // Limpiar formulario solo si no es edición
+            if (!isEditing) {
+                setLibro({
+                    nombre: '',
+                    apellido: '',
+                    fecha_ingreso: '',
+                    genero: '',
+                    nacionalidad: '',
+                    condena: '',
+                    pandilla: '',
+                    id_antecedente: '',
+                    id_incidentes: '',
+                    status: true
+                });
+            }
         } catch (error) {
-            setError('Error al crear el libro');
+            setError(isEditing ? 'Error al actualizar el recluso' : 'Error al crear el recluso');
             console.error(error);
         }
     };
+
+
 
     if (!show) return null;
 

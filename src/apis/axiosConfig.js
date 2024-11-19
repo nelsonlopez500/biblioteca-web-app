@@ -18,3 +18,5 @@ export const prestamosApiClient = createApiClient(process.env.REACT_APP_PRESTAMO
 export const createReclusoApiClient = createApiClient(process.env.REACT_APP_CREATE_RECLUSO_API_URL);
 export const deleteReclusoApiClient = createApiClient(process.env.REACT_APP_DELETE_RECLUSO_API_URL);
 export const deletePlanillaApiClient = createApiClient(process.env.REACT_APP_DELETE_PLANILLA_API_URL);
+export const byIdReclusoApiClient = createApiClient(process.env.REACT_APP_RECLUSOS_BY_ID_API_URL);
+export const updateReclusoApiClient = createApiClient(process.env.REACT_APP_UPDATE_RECLUSO_API_URL);

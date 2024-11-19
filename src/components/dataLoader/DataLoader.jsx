@@ -3,10 +3,14 @@ import { useLocation, Routes, Route } from 'react-router-dom';
 import CommonPage from '../../pages/commonPage/Commonpage.jsx';
 import { getReclusos, getPlanillas, getPenales, getEmpleados, deleteRecluso, deletePlanilla } from '../../services/apisService.jsx';
 import FormularioLibros from '../formularios/formularioLibros.jsx';
+import { createRecluso, getReclusoById, updateRecluso } from '../../services/apisService.jsx';
+
 
 const DataLoader = () => {
     const [data, setData] = useState([]);
     const location = useLocation();
+    const [selectedRecord, setSelectedRecord] = useState(null);
+
 
     // Definimos los encabezados para cada ruta
     const tableHeaders = {
@@ -104,11 +108,26 @@ const DataLoader = () => {
                         tableData={data}
                         columnHeaders={tableHeaders['/Reclusos']}
                         showAddButton={true}
-                        FormComponent={(props) => <FormularioLibros {...props} TitleForm="Agregar Recluso" />}
-                        EditComponent={(props) => <FormularioLibros {...props} TitleForm="Editar Recluso" />}
-                        deleteMethod={deleteRecluso} // metodo
-                        entityName="recluso" // single
-                        idField="id_recluso" // id, según db
+                        onRowSelect={(record) => setSelectedRecord(record)}
+                        FormComponent={(props) => (
+                            <FormularioLibros
+                                {...props}
+                                TitleForm="Agregar Recluso"
+                                submitAction={createRecluso}
+                            />
+                        )}
+                        EditComponent={(props) => (
+                            <FormularioLibros
+                                {...props}
+                                TitleForm="Editar Recluso"
+                                submitAction={updateRecluso}
+                                initialData={selectedRecord}
+                                isEditing={true}
+                            />
+                        )}
+                        deleteMethod={deleteRecluso}
+                        entityName="recluso"
+                        idField="id_recluso"
                     />
                 }
             />

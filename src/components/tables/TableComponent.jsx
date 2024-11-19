@@ -18,7 +18,7 @@ const TableComponent = ({
     const [currentPage, setCurrentPage] = useState(1);
     const [sortColumn, setSortColumn] = useState(null);
     const [sortDirection, setSortDirection] = useState('asc');
-    const itemsPerPage = 5;
+    const itemsPerPage = 10;
     const [showModal, setShowModal] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
 

@@ -31,6 +31,7 @@ const Sidebar = () => {
             </div>
             <nav className="sidebar-nav">
                 <ul>
+                    <li><Link to="/">Inicio</Link></li>
                     <li><Link to="/libros">Libros</Link></li>
                     <li><Link to="/prestamos">Préstamos</Link></li>
                     <li><Link to="/editoriales">Editoriales</Link></li>

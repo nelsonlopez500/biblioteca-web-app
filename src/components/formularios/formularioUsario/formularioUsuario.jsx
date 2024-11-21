@@ -34,45 +34,50 @@ const FormularioUsuario = ({
         }));
     };
 
-    useEffect(() => {
-        if (isEditing && initialData) {
-            const fechaFormateada = initialData.fecha_registro ?
-                new Date(initialData.fecha_registro).toISOString().split('T')[0] : '';
-
-            // Mapeo de textos a IDs para roles si es necesario
-            const rolesMap = {
-                'Administrador': '1',
-                'Usuario': '2'
-            };
-
-            setUsuario({
-                ...initialData,
-                fecha_registro: fechaFormateada,
-                // Convertir IDs a string para los selects
-                rol_id: initialData.rol_id?.toString() || '',
-                biblioteca_id: initialData.biblioteca_id?.toString() || '',
-                // Mantener el resto de campos como vienen
-                nombre: initialData.nombre || '',
-                apellido: initialData.apellido || '',
-                direccion: initialData.direccion || '',
-                telefono: initialData.telefono || '',
-                email: initialData.email || '',
-                status: initialData.status ?? true
-            });
-        } else {
-            setUsuario({
-                nombre: '',
-                apellido: '',
-                direccion: '',
-                telefono: '',
-                email: '',
-                fecha_registro: '',
-                rol_id: '',
-                biblioteca_id: '',
-                status: true
-            });
-        }
-    }, [isEditing, initialData]);
+        useEffect(() => {
+            if (isEditing && initialData) {
+                const fechaFormateada = initialData.fecha_registro ?
+                    new Date(initialData.fecha_registro).toISOString().split('T')[0] : '';
+        
+                // Mapeo de textos a IDs para roles
+                const rolesMap = {
+                    'Administrador': '1',
+                    'Usuario': '3'
+                };
+        
+                // Debug log para ver el valor que llega
+                console.log('rol_id recibido:', initialData.rol_id);
+                console.log('valor mapeado:', rolesMap[initialData.rol_id]);
+        
+                setUsuario({
+                    ...initialData,
+                    fecha_registro: fechaFormateada,
+                    // Asignar directamente el rol_id si ya es un ID, sino hacer el mapeo
+                    rol_id: initialData.rol_id.toString() === '1' || initialData.rol_id.toString() === '2' 
+                        ? initialData.rol_id.toString() 
+                        : rolesMap[initialData.rol_id] || '',
+                    biblioteca_id: initialData.biblioteca_id?.toString() || '',
+                    nombre: initialData.nombre || '',
+                    apellido: initialData.apellido || '',
+                    direccion: initialData.direccion || '',
+                    telefono: initialData.telefono || '',
+                    email: initialData.email || '',
+                    status: initialData.status ?? true
+                });
+            } else {
+                setUsuario({
+                    nombre: '',
+                    apellido: '',
+                    direccion: '',
+                    telefono: '',
+                    email: '',
+                    fecha_registro: '',
+                    rol_id: '',
+                    biblioteca_id: '',
+                    status: true
+                });
+            }
+        }, [isEditing, initialData]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -203,7 +208,7 @@ const FormularioUsuario = ({
                                         >
                                             <option value="" disabled>Seleccione un rol</option>
                                             <option value="1">Administrador</option>
-                                            <option value="2">Usuario</option>
+                                            <option value="3">Usuario</option>
                                         </select>
                                     </div>
 

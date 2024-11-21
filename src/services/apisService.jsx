@@ -1,4 +1,14 @@
-import { usersApiClient, librosApiClient, prestamosApiClient, editorialesApiClient, createLibroApiClient, deleteLibroApiClient, createUsuarioApiClient, deleteUsuarioApiClient } from '../apis/axiosConfig';
+import {
+    usersApiClient,
+    librosApiClient,
+    prestamosApiClient,
+    editorialesApiClient,
+    createLibroApiClient,
+    deleteLibroApiClient,
+    createUsuarioApiClient,
+    deleteUsuarioApiClient,
+    updateLibroApiClient
+} from '../apis/axiosConfig';
 
 // Métodos para la API de usuarios
 export const getUsers = async () => {
@@ -54,6 +64,18 @@ export const createLibro = async (libro) => {
         throw error;
     }
 };
+
+//Metodo para actualizar un libro
+export const updateLibro = async (libro) => {
+    try {
+        const response = await updateLibroApiClient.put(`/${libro.libro_id}`, libro);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating libro:', error);
+        throw error;
+    }
+};
+
 
 export const createUsuario = async (usuario) => {
     try {

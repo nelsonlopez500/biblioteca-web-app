@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
 import CommonPage from '../../pages/commonPage/Commonpage.jsx';
-import { getUsers, getLibros, getPrestamos, getEditoriales, deleteLibro, deleteUsuario } from '../../services/apisService.jsx';
+import { getUsers, getLibros, getPrestamos, getEditoriales, deleteLibro, deleteUsuario, createLibro, updateLibro, createUsuario, updateUsuario } from '../../services/apisService.jsx';
 import FormularioLibros from '../formularios/formularioLibros.jsx';
 import FormularioUsuario from '../formularios/formularioUsario/formularioUsuario.jsx';
 
 const DataLoader = () => {
     const [data, setData] = useState([]);
     const location = useLocation();
+    const [selectedRecord, setSelectedRecord] = useState(null);
+
 
     // Definimos los encabezados para cada ruta
     const tableHeaders = {
@@ -101,8 +103,23 @@ const DataLoader = () => {
                         columnHeaders={tableHeaders['/libros']}
                         showAddButton={true}
                         showEditButton={true}
-                        FormComponent={(props) => <FormularioLibros {...props} TitleForm="Agregar Libro" />}
-                        EditComponent={(props) => <FormularioLibros {...props} TitleForm="Editar Libro" />}
+                        onRowSelect={(record) => setSelectedRecord(record)}
+                        FormComponent={(props) => (
+                            <FormularioLibros
+                                {...props}
+                                TitleForm="Agregar Libro"
+                                submitAction={createLibro}
+                            />
+                        )}
+                        EditComponent={(props) => (
+                            <FormularioLibros
+                                {...props}
+                                TitleForm="Editar Libro"
+                                submitAction={updateLibro}
+                                initialData={selectedRecord}
+                                isEditing={true}
+                            />
+                        )}
                         deleteMethod={deleteLibro}
                         entityName="libro"
                         idField="libro_id"
@@ -150,8 +167,23 @@ const DataLoader = () => {
                         columnHeaders={tableHeaders['/usuarios']}
                         showAddButton={true}
                         showEditButton={true}
-                        FormComponent={(props) => <FormularioUsuario {...props} TitleForm="Agregar Uusario" />}
-                        EditComponent={(props) => <FormularioUsuario {...props} TitleForm="Editar Usuario" />}
+                        onRowSelect={(record) => setSelectedRecord(record)}
+                        FormComponent={(props) => (
+                            <FormularioUsuario 
+                                {...props}
+                                TitleForm="Agregar Usuario"
+                                submitAction={createUsuario}
+                            />
+                        )}
+                        EditComponent={(props) => (
+                            <FormularioUsuario
+                                {...props}
+                                TitleForm="Editar Usuario"
+                                submitAction={updateUsuario}
+                                initialData={selectedRecord}
+                                isEditing={true}
+                            />
+                        )}
                         deleteMethod={deleteUsuario}
                         entityName="usuario"
                         idField="usuario_id"

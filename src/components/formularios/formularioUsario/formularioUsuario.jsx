@@ -3,7 +3,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './formularioUsuario.css';
 import { createUsuario } from '../../../services/apisService.jsx';
 
-const FormularioUsuario = ({ show, handleClose, onSubmit, TitleForm }) => {
+const FormularioUsuario = ({
+    show,
+    handleClose,
+    onSubmit,
+    TitleForm,
+    initialData,
+    isEditing,
+    submitAction 
+}) => {
     const [usuario, setUsuario] = useState({
         nombre: '',
         apellido: '',

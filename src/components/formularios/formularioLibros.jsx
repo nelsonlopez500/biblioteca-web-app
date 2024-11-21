@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FormularioLibros.css';
 import { createLibro } from '../../services/apisService.jsx';
 
-const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
-    const [libro, setLibro] = useState({
+const FormularioLibros = ({
+    show,
+    handleClose,
+    onSubmit,
+    TitleForm,
+    initialData,
+    isEditing,
+    submitAction
+}) => {
+    const estadoInicial = {
         titulo: '',
         isbn: '',
         fecha_publicacion: '',
@@ -12,7 +20,9 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
         categoria_id: '',
         biblioteca_id: '',
         status: true
-    });
+    };
+
+    const [libro, setLibro] = useState(estadoInicial);
     const [error, setError] = useState(null);
 
     const handleChange = (e) => {
@@ -23,14 +33,39 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(null);
-        try {
-            const result = await createLibro(libro);
-            onSubmit(result);
-            handleClose();
-            // Limpiar formulario
+    // Cargar datos iniciales en modo edición
+    useEffect(() => {
+        if (isEditing && initialData) {
+            const fechaFormateada = initialData.fecha_publicacion ?
+                new Date(initialData.fecha_publicacion).toISOString().split('T')[0] : '';
+
+            // Mapeo de textos a IDs para categorías
+            const categoriasMap = {
+                'Ficción': '1',
+                'Ciencia': '3',
+                'Tecnología': '4',
+                'Historia': '5',
+                'Arte': '28',
+                'Música Clásica': '29',
+                'Bibliografías': '30',
+                'Aventuras': '31'
+            };
+
+            // Mapeo de textos a IDs para editoriales
+            const editorialesMap = {
+                'Editorial LPGL': '1'
+            };
+
+            setLibro({
+                ...initialData,
+                fecha_publicacion: fechaFormateada,
+                // Convertir los textos a IDs usando los mapeos
+                categoria_id: categoriasMap[initialData.categoria_id] || '',
+                editorial_id: editorialesMap[initialData.editorial_id] || '',
+                biblioteca_id: initialData.biblioteca_id?.toString() || '',
+                status: initialData.status ?? true
+            });
+        } else {
             setLibro({
                 titulo: '',
                 isbn: '',
@@ -40,8 +75,32 @@ const FormularioLibros = ({ show, handleClose, onSubmit, TitleForm }) => {
                 biblioteca_id: '',
                 status: true
             });
+        }
+    }, [isEditing, initialData]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError(null);
+        try {
+            // Usar submitAction que viene como prop (createLibro o updateLibro)
+            const result = await submitAction(libro);
+            onSubmit(result);
+            handleClose();
+
+            // Limpiar formulario solo si no es edición
+            if (!isEditing) {
+                setLibro({
+                    titulo: '',
+                    isbn: '',
+                    fecha_publicacion: '',
+                    editorial_id: '',
+                    categoria_id: '',
+                    biblioteca_id: '',
+                    status: true
+                });
+            }
         } catch (error) {
-            setError('Error al crear el libro');
+            setError(isEditing ? 'Error al actualizar el libro' : 'Error al crear el libro');
             console.error(error);
         }
     };

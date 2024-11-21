@@ -13,7 +13,8 @@ const TableComponent = ({
     EditComponent,
     deleteMethod, // Nueva prop
     entityName = 'registro', // Nueva prop
-    idField // Nueva prop
+    idField, // Nueva prop
+    onRowSelect
 }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortColumn, setSortColumn] = useState(null);
@@ -69,6 +70,7 @@ const TableComponent = ({
     };
 
     const handleEdit = (row) => {
+        onRowSelect(row);
         setSelectedRow(row);
         setShowModal(true);
     };

@@ -20,3 +20,4 @@ export const createUsuarioApiClient = createApiClient(process.env.REACT_APP_CREA
 export const deleteLibroApiClient = createApiClient(process.env.REACT_APP_DELETE_LIBRO_API_URL);
 export const deleteUsuarioApiClient = createApiClient(process.env.REACT_APP_DELETE_USERS_API_URL);
 export const updateLibroApiClient = createApiClient(process.env.REACT_APP_UPDATE_LIBRO_API_URL);
+export const updateUsuarioApiClient = createApiClient(process.env.REACT_APP_UPDATE_USER_API_URL);

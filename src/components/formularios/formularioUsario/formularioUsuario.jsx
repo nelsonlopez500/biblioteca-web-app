@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './formularioUsuario.css';
 import { createUsuario } from '../../../services/apisService.jsx';
@@ -10,9 +10,9 @@ const FormularioUsuario = ({
     TitleForm,
     initialData,
     isEditing,
-    submitAction 
+    submitAction
 }) => {
-    const [usuario, setUsuario] = useState({
+    const estadoInicial = {
         nombre: '',
         apellido: '',
         direccion: '',
@@ -22,7 +22,8 @@ const FormularioUsuario = ({
         rol_id: '',
         biblioteca_id: '',
         status: true
-    });
+    };
+    const [usuario, setUsuario] = useState(estadoInicial);
     const [error, setError] = useState(null);
 
     const handleChange = (e) => {
@@ -33,13 +34,32 @@ const FormularioUsuario = ({
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(null);
-        try {
-            const result = await createUsuario(usuario);
-            onSubmit(result);
-            handleClose();
+    useEffect(() => {
+        if (isEditing && initialData) {
+            const fechaFormateada = initialData.fecha_registro ?
+                new Date(initialData.fecha_registro).toISOString().split('T')[0] : '';
+
+            // Mapeo de textos a IDs para roles si es necesario
+            const rolesMap = {
+                'Administrador': '1',
+                'Usuario': '2'
+            };
+
+            setUsuario({
+                ...initialData,
+                fecha_registro: fechaFormateada,
+                // Convertir IDs a string para los selects
+                rol_id: initialData.rol_id?.toString() || '',
+                biblioteca_id: initialData.biblioteca_id?.toString() || '',
+                // Mantener el resto de campos como vienen
+                nombre: initialData.nombre || '',
+                apellido: initialData.apellido || '',
+                direccion: initialData.direccion || '',
+                telefono: initialData.telefono || '',
+                email: initialData.email || '',
+                status: initialData.status ?? true
+            });
+        } else {
             setUsuario({
                 nombre: '',
                 apellido: '',
@@ -51,8 +71,34 @@ const FormularioUsuario = ({
                 biblioteca_id: '',
                 status: true
             });
+        }
+    }, [isEditing, initialData]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError(null);
+        try {
+            // Usar submitAction que viene como prop (createUsuario o updateUsuario)
+            const result = await submitAction(usuario);
+            onSubmit(result);
+            handleClose();
+
+            // Limpiar formulario solo si no es edición
+            if (!isEditing) {
+                setUsuario({
+                    nombre: '',
+                    apellido: '',
+                    direccion: '',
+                    telefono: '',
+                    email: '',
+                    fecha_registro: '',
+                    rol_id: '',
+                    biblioteca_id: '',
+                    status: true
+                });
+            }
         } catch (error) {
-            setError('Error al crear el usuario');
+            setError(isEditing ? 'Error al actualizar el usuario' : 'Error al crear el usuario');
             console.error(error);
         }
     };

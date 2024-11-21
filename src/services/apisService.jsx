@@ -7,7 +7,8 @@ import {
     deleteLibroApiClient,
     createUsuarioApiClient,
     deleteUsuarioApiClient,
-    updateLibroApiClient
+    updateLibroApiClient,
+    updateUsuarioApiClient
 } from '../apis/axiosConfig';
 
 // Métodos para la API de usuarios
@@ -83,6 +84,17 @@ export const createUsuario = async (usuario) => {
         return response.data;
     } catch (error) {
         console.error('Error creating usuario:', error);
+        throw error;
+    }
+};
+
+//Metodo para actualizar un usuario
+export const updateUsuario = async (usuario) => {
+    try {
+        const response = await updateUsuarioApiClient.put(`/${usuario.usuario_id}`, usuario);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating usuario:', error);
         throw error;
     }
 };
